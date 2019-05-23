@@ -6,14 +6,18 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/23 18:32:09 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/23 18:44:55 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "parser.h"
+#include "libft.h"
 #include <stdio.h>
+
+#define FT_LS_USAGE "ft_ls: illegal option -- %c\n"\
+	"usage: ls [-lRart] [file ...]\n"
 
 _Bool	parser(int argc, char **argv, t_options *options)
 {
@@ -23,13 +27,8 @@ _Bool	parser(int argc, char **argv, t_options *options)
 	while (!parse_options(argv[++i], options) && i < argc)
 	{
 		// pour le reste du parsing, ici il s'arrete une fois plus d'options
-		printf("i:%d, arg:%s\n", i, argv[i]);
+		(void)i; // to debugg, it is useless of course
 	}
-	printf("l:%d\n", options->l);
-	printf("R:%d\n", options->upr);
-	printf("a:%d\n", options->a);
-	printf("r:%d\n", options->r);
-	printf("t:%d\n", options->t);
 	return (EXIT_FAILURE);
 }
 
@@ -71,6 +70,13 @@ _Bool	set_booleans_of_t_options(char c, t_options *options)
 	else if (c == 't' && (options->t |= (1 << 0)))
 		return (EXIT_SUCCESS);
 	else
+	{
+		print_option_usage(c);
 		return (EXIT_FAILURE);
+	}
 }
 
+void	print_option_usage(char c)
+{
+	ft_printf(FT_LS_USAGE, c);
+}
