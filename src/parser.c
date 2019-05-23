@@ -6,15 +6,34 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/23 16:06:02 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/23 18:32:09 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
 #include <stdlib.h>
+
+#include "parser.h"
 #include <stdio.h>
 
-_Bool	parse_options(char *argv)
+_Bool	parser(int argc, char **argv, t_options *options)
+{
+	int	i;
+
+	i = 0;
+	while (!parse_options(argv[++i], options) && i < argc)
+	{
+		// pour le reste du parsing, ici il s'arrete une fois plus d'options
+		printf("i:%d, arg:%s\n", i, argv[i]);
+	}
+	printf("l:%d\n", options->l);
+	printf("R:%d\n", options->upr);
+	printf("a:%d\n", options->a);
+	printf("r:%d\n", options->r);
+	printf("t:%d\n", options->t);
+	return (EXIT_FAILURE);
+}
+
+_Bool	parse_options(char *argv, t_options *options)
 {
 	if (argv)
 	{
@@ -26,10 +45,9 @@ _Bool	parse_options(char *argv)
 				return (EXIT_FAILURE);
 			else
 			{
-			//	go parse les options till wrong
 				while (argv && *argv)
 				{
-					printf("option:%c\n", *argv);
+					set_booleans_of_t_options(*argv, options);
 					++argv;
 				}
 				return (EXIT_SUCCESS);
@@ -40,14 +58,19 @@ _Bool	parse_options(char *argv)
 		return (EXIT_SUCCESS);
 }
 
-_Bool	parser(int argc, char **argv)
+_Bool	set_booleans_of_t_options(char c, t_options *options)
 {
-	int	i;
-
-	i = 0;
-	while (!parse_options(argv[++i]) && i < argc)
-	{
-		printf("i:%d, arg:%s\n", i, argv[i]);
-	}
-	return (EXIT_FAILURE);
+	if (c == 'l' && (options->l |= (1 << 0)))
+		return (EXIT_SUCCESS);
+	else if (c == 'R' && (options->upr |= (1 << 0)))
+		return (EXIT_SUCCESS);
+	else if (c == 'a' && (options->a |= (1 << 0)))
+		return (EXIT_SUCCESS);
+	else if (c == 'r' && (options->r |= (1 << 0)))
+		return (EXIT_SUCCESS);
+	else if (c == 't' && (options->t |= (1 << 0)))
+		return (EXIT_SUCCESS);
+	else
+		return (EXIT_FAILURE);
 }
+

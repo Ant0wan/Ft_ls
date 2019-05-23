@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 10:01:06 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/23 15:49:42 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/23 16:35:44 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 
 int	main(int argc, char **argv)
 {
-	if (!parser(argc, argv))
+	t_options	options;
+
+	options = (t_options){0};
+	if (!parser(argc, argv, &options))
 		return (EXIT_FAILURE);
 	else
 		return (EXIT_SUCCESS);
