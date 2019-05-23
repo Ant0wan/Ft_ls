@@ -6,13 +6,11 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 10:01:06 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/23 12:48:18 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/23 14:37:49 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
-#include "libft.h"
 
 int	main(int argc, char **argv)
 {
@@ -21,8 +19,3 @@ int	main(int argc, char **argv)
 	else
 		return (EXIT_FAILURE);
 }
-
-//__attribute__((destructor)) void end(void)
-//{
-//	while (1);
-//}
