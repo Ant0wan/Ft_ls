@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/23 20:36:51 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:44:59 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ _Bool	parser(int argc, char **argv, t_options *options)
 	i = 1;
 	while (!parse_options(argv[i], options) && i < argc)
 		++i;
-		// pour le reste du parsing, ici il s'arrete une fois plus d'options
+	// pour le reste du parsing, ici il s'arrete une fois plus d'options
 	ft_printf("l:%d\n", options->l);	
 	ft_printf("R:%d\n", options->upr);	
 	ft_printf("a:%d\n", options->a);	
