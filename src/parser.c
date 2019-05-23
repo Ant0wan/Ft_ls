@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/23 20:47:17 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:51:33 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,16 @@ _Bool	parse_options(char *argv, t_options *options)
 	{
 		if (*argv != '-')
 			return (EXIT_FAILURE);
+		if (++argv && (*argv == '-' || *argv == 0))
+			return (EXIT_FAILURE);
 		else
 		{
-			if (++argv && (*argv == '-' || *argv == 0))
-				return (EXIT_FAILURE);
-			else
+			while (argv && *argv)
 			{
-				while (argv && *argv)
-				{
-					set_booleans_of_t_options(*argv, options);
-					++argv;
-				}
-				return (EXIT_SUCCESS);
+				set_booleans_of_t_options(*argv, options);
+				++argv;
 			}
+			return (EXIT_SUCCESS);
 		}
 	}
 	else
