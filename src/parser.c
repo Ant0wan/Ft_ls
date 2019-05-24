@@ -6,14 +6,15 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/24 13:36:31 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:39:29 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "parser.h"
 #include "libft.h"
+#include "parser.h"
+#include "formatting.h"
 
 #define FT_LS_USAGE "ft_ls: illegal option -- %c\n"\
 	"usage: ls [-lRart] [file ...]\n"
@@ -25,21 +26,15 @@ _Bool	parser(int argc, char **argv, t_options *options)
 	i = 1;
 	while (!parse_options(argv[i], options) && i < argc)
 		++i;
-	if (argv[i] == NULL)
+	if (argv[i] && *argv[i] == '-' && *++argv[i] == '-')
+		++i;
+	if (i == argc)
 	{
+		(void)i;
 		// go for the current repo LS // ICI LS COMMENCE ET LE PARSING SE TERMINE
-		ft_printf("ici c;est repo\n");
 	}
 	else
-	{
-		// go for ls each arg // ICI LS COMMENCE ET LE PARSING SE TERMINE
-		while (argv[i])
-		{
-			ft_printf("r-d-r-- %s\n", argv[i]);
-			++i;
-		}
-	}
-	// pour le reste du parsing, ici il s'arrete une fois plus d'options
+		output_ls_of_each_argument(argc, argv, i);
 	return (EXIT_FAILURE);
 }
 
@@ -49,9 +44,7 @@ _Bool	parse_options(char *argv, t_options *options)
 	{
 		if (*argv != '-')
 			return (EXIT_FAILURE);
-		if (++argv && *argv == '-')
-			return (EXIT_SUCCESS);
-		else if (argv && *argv == '\0')
+		if (++argv && (*argv == '-' || *argv == '\0'))
 			return (EXIT_FAILURE);
 		else
 		{

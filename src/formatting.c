@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   formatting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/10 10:01:06 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/24 14:02:54 by abarthel         ###   ########.fr       */
+/*   Created: 2019/05/24 13:45:25 by abarthel          #+#    #+#             */
+/*   Updated: 2019/05/24 14:38:08 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-#include "parser.h"
-
-int	main(int argc, char **argv)
+void	output_ls_of_each_argument(int argc, char **argv, int i)
 {
-	t_options	options;
-
-	options = (t_options){.l = 0, .upr = 0, .a = 0, .r = 0, .t = 0};
-	if (!parser(argc, argv, &options))
-		return (EXIT_FAILURE);
-	else
-		return (EXIT_SUCCESS);
+	(void)argc;
+	while (argv[i]) // && i < argc)
+	{
+		ft_printf("r-d-r-- %s\n", argv[i]);
+		++i;
+	}
 }
