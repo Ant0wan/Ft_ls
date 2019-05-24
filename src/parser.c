@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/24 13:21:15 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/24 13:36:31 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,17 @@ _Bool	parser(int argc, char **argv, t_options *options)
 		++i;
 	if (argv[i] == NULL)
 	{
-		// go for the current repo LS
+		// go for the current repo LS // ICI LS COMMENCE ET LE PARSING SE TERMINE
 		ft_printf("ici c;est repo\n");
 	}
 	else
 	{
-		// go for ls each arg
-		ft_printf("ici chaque arg traite %s\n", argv[i]);
+		// go for ls each arg // ICI LS COMMENCE ET LE PARSING SE TERMINE
+		while (argv[i])
+		{
+			ft_printf("r-d-r-- %s\n", argv[i]);
+			++i;
+		}
 	}
 	// pour le reste du parsing, ici il s'arrete une fois plus d'options
 	return (EXIT_FAILURE);
