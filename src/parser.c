@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/24 18:32:03 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/25 09:28:50 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ _Bool	parser(int argc, char **argv, t_options *options)
 		++i;
 	if (i == argc)
 	{
-		if (get_what_is_in_the_dir("."))
+		if (get_what_is_in_the_dir(".", options))
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		if (output_ls_of_each_argument(argc, argv, i))
+		if (output_ls_of_each_argument(argc, argv, i, options))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_FAILURE);
