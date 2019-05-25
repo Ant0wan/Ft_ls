@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 13:45:25 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/25 10:58:41 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/25 11:05:55 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 #include "parser.h"
 #include "dlist.h"
 #define NOSUCHFILE "ls: %s: No such file or directory\n"
+
+void	select_output_format(t_dlist *node, t_options *options)
+{
+	if (options->l == 0)
+		ft_printf("%s\n", node->s_dir->d_name);
+	else
+		ft_printf("r-d-r-d type:%d, %s\n", node->s_dir->d_type,
+				node->s_dir->d_name);
+}
 
 _Bool	output_ls_of_each_argument(int argc, char **argv, int i,
 		t_options *options)
@@ -37,8 +46,7 @@ void	printf_list_element(t_dlist *ptr_list_beg, t_dlist *ptr_list_end,
 	{
 		while (ptr_list_end->s_dir)
 		{
-			ft_printf("type:%d, %s\n", ptr_list_end->s_dir->d_type,
-					ptr_list_end->s_dir->d_name);
+			select_output_format(ptr_list_end, options);
 			ptr_list_end = ptr_list_end->previous;
 			if (!ptr_list_end)
 				break ;
@@ -48,8 +56,7 @@ void	printf_list_element(t_dlist *ptr_list_beg, t_dlist *ptr_list_end,
 	{
 		while (ptr_list_beg->s_dir)
 		{
-			ft_printf("type:%d, %s\n", ptr_list_beg->s_dir->d_type,
-					ptr_list_beg->s_dir->d_name);
+			select_output_format(ptr_list_beg, options);
 			ptr_list_beg = ptr_list_beg->next;
 			if (!ptr_list_beg)
 				break ;
