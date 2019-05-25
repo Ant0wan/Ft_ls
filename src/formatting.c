@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 13:45:25 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/25 11:05:55 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/25 11:12:58 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ _Bool	get_what_is_in_the_dir(char *av, t_options *options)
 		}
 	}
 	printf_list_element(ptr_list_beg, ptr_list_end, options);
+	if (options->upr == 1)
+	{
+		ft_printf("\n%s\n", ptr_list_beg->s_dir->d_name);
+		get_what_is_in_the_dir(ptr_list_beg->s_dir->d_name, options); // ici gere le -R mais il faudrait filter les fichier car ca bloque la recurssion.
+	}
 	(void)closedir(ret_opendir);
 	free_entire_dlist(ptr_list_end);
 	return (EXIT_SUCCESS);
