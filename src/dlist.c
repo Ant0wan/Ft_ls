@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:55:09 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/23 14:29:39 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/25 10:42:35 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "dlist.h"
 
-t_dlist	*create_node(t_dlist *previous, t_dlist *next, void *data)
+t_dlist	*create_node(t_dlist *previous, t_dlist *next, struct dirent *s_dir)
 {
 	t_dlist	*new;
 
@@ -23,7 +23,7 @@ t_dlist	*create_node(t_dlist *previous, t_dlist *next, void *data)
 	{
 		new->next = next;
 		new->previous = previous;
-		new->data = data;
+		new->s_dir = s_dir;
 		return (new);
 	}
 	else
@@ -52,12 +52,12 @@ void	free_entire_dlist(t_dlist *somewhere_in_dlist)
 	t_dlist	*tmp;
 
 	tmp = NULL;
-	while (somewhere_in_dlist->next)
+	while (somewhere_in_dlist && somewhere_in_dlist->next)
 		somewhere_in_dlist = somewhere_in_dlist->next;
 	while (somewhere_in_dlist)
 	{
 		tmp = somewhere_in_dlist;
-		ft_memdel((void**)&somewhere_in_dlist);
+		free(somewhere_in_dlist);
 		somewhere_in_dlist = somewhere_in_dlist->previous;
 	}
 }
