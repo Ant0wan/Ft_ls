@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:55:09 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/25 10:42:35 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/25 15:06:17 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ t_dlist	*malloc_a_node(void)
 	else
 		return (NULL);
 }
-
-/*
-** should free what is inside the structure (to be defined later)
-*/
 
 void	free_entire_dlist(t_dlist *somewhere_in_dlist)
 {
