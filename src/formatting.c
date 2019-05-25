@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 13:45:25 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/25 15:39:32 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/25 16:17:17 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,14 @@ void	select_output_format(t_dlist *node, t_options *options)
 	if (options->l == 0)
 		ft_printf("%s\n", node->s_dir->d_name);
 	else
-		ft_printf("r-d-r-d type:%d, %s\n", node->s_dir->d_type,
-				node->s_dir->d_name);
+	{
+		if (node->s_dir->d_type == 10)
+			ft_printf("r-d-r-d type:%3d, %s -> %s\n", node->s_dir->d_type,
+					node->s_dir->d_name, "ft_ls.dSYM");
+		else
+			ft_printf("r-d-r-d type:%3d, %s\n", node->s_dir->d_type,
+					node->s_dir->d_name);
+	}
 }
 
 _Bool	output_ls_of_each_argument(int argc, char **argv, int i,
