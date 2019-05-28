@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 13:45:25 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/28 17:45:39 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/28 17:47:02 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ _Bool	get_what_is_in_the_dir(char *av, t_options *options)
 		{
 			while (ptr_list_beg && ptr_list_beg->s_dir && ptr_list_beg->s_dir->d_type != DT_DIR)
 				ptr_list_beg = ptr_list_beg->next;
-			av = ft_strjoin(ptr_list_end->pathname, "");
 			if (!(ptr_list_beg))
 				return (EXIT_SUCCESS);
+			av = ft_strjoin(ptr_list_end->pathname, "");
 			av = ft_strjoin(av, ptr_list_beg->s_dir->d_name);
 			ft_printf("\n>%s:\n", av);
 			get_what_is_in_the_dir(av, options);
@@ -122,9 +122,9 @@ _Bool	get_what_is_in_the_dir(char *av, t_options *options)
 		{
 			while (ptr_list_end && ptr_list_end->s_dir && ptr_list_end->s_dir->d_type != DT_DIR)
 				ptr_list_end = ptr_list_end->previous;
-			av = ft_strjoin(ptr_list_end->pathname, "");
 			if (!(ptr_list_end))
 				return (EXIT_SUCCESS);
+			av = ft_strjoin(ptr_list_end->pathname, "");
 			av = ft_strjoin(av, ptr_list_end->s_dir->d_name);
 			ft_printf("\n>%s:\n", av);
 			get_what_is_in_the_dir(av, options);
