@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:55:09 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/25 15:06:17 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/28 11:04:25 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	free_entire_dlist(t_dlist *somewhere_in_dlist)
 		somewhere_in_dlist = somewhere_in_dlist->next;
 	while (somewhere_in_dlist)
 	{
-		tmp = somewhere_in_dlist;
+		tmp = somewhere_in_dlist->previous;
 		free(somewhere_in_dlist);
-		somewhere_in_dlist = somewhere_in_dlist->previous;
+		somewhere_in_dlist = tmp;
 	}
 }
