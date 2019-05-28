@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 13:45:25 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/28 17:11:44 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/28 17:45:39 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 void	select_output_format(t_dlist *node, t_options *options)
 {
 	if (options->l == 0)
-		ft_printf("%s%s\n", node->pathname, node->s_dir->d_name);
+		ft_printf("%s\n", node->s_dir->d_name);
+	//	ft_printf("%s%s\n", node->pathname, node->s_dir->d_name);
 	else
 	{
 		if (node->s_dir->d_type == 10)
@@ -80,7 +81,7 @@ _Bool	get_what_is_in_the_dir(char *av, t_options *options)
 	if ((ret_opendir = opendir(av)) == NULL)
 	{
 		ft_printf(NOSUCHFILE, av);
-		return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	}
 	ptr_list_end = create_node(NULL, NULL, NULL);
 	ptr_list_beg = ptr_list_end;
@@ -93,7 +94,6 @@ _Bool	get_what_is_in_the_dir(char *av, t_options *options)
 			ptr_list_end->s_dir = ret_readdir;
 			ptr_list_end->pathname = ft_strdup(av); // leak
 			ptr_list_end->pathname = ft_strjoin(ptr_list_end->pathname, "/"); //leak
-//			lstat(ft_strjoin(ptr_list_end->pathname, ptr_list_end->s_dir->d_name), &ptr_list_end->s_stat);
 		}
 		else
 		{
@@ -101,25 +101,35 @@ _Bool	get_what_is_in_the_dir(char *av, t_options *options)
 			ptr_list_end = ptr_list_end->next;
 			ptr_list_end->pathname = ft_strdup(av); // leak
 			ptr_list_end->pathname = ft_strjoin(ptr_list_end->pathname, "/"); // leak
-//			lstat(ft_strjoin(ptr_list_end->pathname, ptr_list_end->s_dir->d_name), &ptr_list_end->s_stat);
 		}
 	}
 	printf_list_element(ptr_list_beg, ptr_list_end, options);
-	while (options->upr == 1 && ptr_list_beg)
+	while (options->upr == 1)
 	{
-		while (ptr_list_beg && ptr_list_beg->s_dir->d_type != DT_DIR)
+		if (options->r == 0)
+		{
+			while (ptr_list_beg && ptr_list_beg->s_dir && ptr_list_beg->s_dir->d_type != DT_DIR)
+				ptr_list_beg = ptr_list_beg->next;
+			av = ft_strjoin(ptr_list_end->pathname, "");
+			if (!(ptr_list_beg))
+				return (EXIT_SUCCESS);
+			av = ft_strjoin(av, ptr_list_beg->s_dir->d_name);
+			ft_printf("\n>%s:\n", av);
+			get_what_is_in_the_dir(av, options);
 			ptr_list_beg = ptr_list_beg->next;
-//		ft_printf(">>%s\n", ptr_list_beg->s_dir->d_name);
-//		ft_printf(">>>%s\n", ptr_list_beg->pathname);
-
-		av = ft_strjoin(ptr_list_end->pathname, "");
-		if (!(ptr_list_beg))
-			return (EXIT_SUCCESS);
-		av = ft_strjoin(av, ptr_list_beg->s_dir->d_name);
-		ft_printf("\n>%s:\n", av);
-	//	ft_printf("| %s\n", av);
-		get_what_is_in_the_dir(av, options);
-		ptr_list_beg = ptr_list_beg->next;
+		}
+		else
+		{
+			while (ptr_list_end && ptr_list_end->s_dir && ptr_list_end->s_dir->d_type != DT_DIR)
+				ptr_list_end = ptr_list_end->previous;
+			av = ft_strjoin(ptr_list_end->pathname, "");
+			if (!(ptr_list_end))
+				return (EXIT_SUCCESS);
+			av = ft_strjoin(av, ptr_list_end->s_dir->d_name);
+			ft_printf("\n>%s:\n", av);
+			get_what_is_in_the_dir(av, options);
+			ptr_list_beg = ptr_list_end->previous;
+		}
 	}
 	(void)closedir(ret_opendir);
 	free_entire_dlist(ptr_list_end);
