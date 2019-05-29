@@ -6,17 +6,20 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 13:45:25 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/28 17:49:12 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/29 17:58:14 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
 #include "formatting.h"
 #include "libft.h"
 #include "parser.h"
 #include "dlist.h"
-#define NOSUCHFILE "ls: %s: No such file or directory\n"
+#define NOSUCHFILE "ft_ls: %s: %s\n"
 
 void	select_output_format(t_dlist *node, t_options *options)
 {
@@ -80,7 +83,7 @@ _Bool	get_what_is_in_the_dir(char *av, t_options *options)
 
 	if ((ret_opendir = opendir(av)) == NULL)
 	{
-		ft_printf(NOSUCHFILE, av);
+		ft_printf(NOSUCHFILE, av, strerror(errno));
 		return (EXIT_SUCCESS);
 	}
 	ptr_list_end = create_node(NULL, NULL, NULL);
