@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 13:45:25 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/29 18:26:07 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:32:01 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "libft.h"
 #include "parser.h"
 #include "dlist.h"
+#include "error.h"
 #define NOSUCHFILE "ft_ls: %s"
 
 void	select_output_format(t_dlist *node, t_options *options)
@@ -42,7 +43,7 @@ _Bool	output_ls_of_each_argument(int argc, char **argv, int i,
 {
 	while (i < argc)
 	{
-		if (get_what_is_in_the_dir(argv[i], options))
+		if (get_what_is_in_the_dir(*argv, argv[i], options))
 			return (EXIT_FAILURE);
 		++i;
 	}
@@ -74,21 +75,16 @@ void	printf_list_element(t_dlist *ptr_list_beg, t_dlist *ptr_list_end,
 	}
 }
 
-_Bool	get_what_is_in_the_dir(char *av, t_options *options)
+_Bool	get_what_is_in_the_dir(char *prog_name, char *av, t_options *options)
 {
 	DIR				*ret_opendir;
 	struct dirent	*ret_readdir;
 	t_dlist			*ptr_list_end;
 	t_dlist			*ptr_list_beg;
-	char			*vas_ret;
 
 	if ((ret_opendir = opendir(av)) == NULL)
 	{
-		//ft_vasprintf(&vas_ret, NOSUCHFILE, av);
-		asprintf(&vas_ret, NOSUCHFILE, av);
-		perror(vas_ret);
-		if (!vas_ret)
-			free(vas_ret);
+		print_error(prog_name, av);
 		return (EXIT_SUCCESS);
 	}
 	ptr_list_end = create_node(NULL, NULL, NULL);
@@ -123,7 +119,7 @@ _Bool	get_what_is_in_the_dir(char *av, t_options *options)
 			av = ft_strjoin(ptr_list_end->pathname, "");
 			av = ft_strjoin(av, ptr_list_beg->s_dir->d_name);
 			ft_printf("\n>%s:\n", av);
-			get_what_is_in_the_dir(av, options);
+			get_what_is_in_the_dir(prog_name, av, options);
 			ptr_list_beg = ptr_list_beg->next;
 		}
 		else
@@ -135,7 +131,7 @@ _Bool	get_what_is_in_the_dir(char *av, t_options *options)
 			av = ft_strjoin(ptr_list_end->pathname, "");
 			av = ft_strjoin(av, ptr_list_end->s_dir->d_name);
 			ft_printf("\n>%s:\n", av);
-			get_what_is_in_the_dir(av, options);
+			get_what_is_in_the_dir(prog_name, av, options);
 			ptr_list_beg = ptr_list_end->previous;
 		}
 	}
