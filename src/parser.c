@@ -6,25 +6,22 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:29:15 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:59:52 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
 #include "libft.h"
 #include "parser.h"
 #include "formatting.h"
-
-#define FT_LS_USAGE "ft_ls: illegal option -- %c\n"\
-	"usage: ls [-lRart] [file ...]\n"
+#include "error.h"
 
 _Bool	parser(int argc, char **argv, t_options *options)
 {
 	int	i;
 
 	i = 1;
-	while (!parse_options(argv[i], options) && i < argc)
+	while (!parse_options(argv, argv[i], options) && i < argc)
 		++i;
 	if (argv[i] && *argv[i] == '-' && *++argv[i] == '-')
 		++i;
@@ -41,20 +38,20 @@ _Bool	parser(int argc, char **argv, t_options *options)
 	return (EXIT_FAILURE);
 }
 
-_Bool	parse_options(char *argv, t_options *options)
+_Bool	parse_options(char **argv, char *av, t_options *options)
 {
-	if (argv)
+	if (av)
 	{
-		if (*argv != '-')
+		if (*av != '-')
 			return (EXIT_FAILURE);
-		if (++argv && (*argv == '-' || *argv == '\0'))
+		if (++av && (*av == '-' || *av == '\0'))
 			return (EXIT_FAILURE);
 		else
 		{
-			while (argv && *argv)
+			while (av && *av)
 			{
-				set_booleans_of_t_options(*argv, options);
-				++argv;
+				set_booleans_of_t_options(*argv, *av, options);
+				++av;
 			}
 			return (EXIT_SUCCESS);
 		}
@@ -63,7 +60,7 @@ _Bool	parse_options(char *argv, t_options *options)
 		return (EXIT_SUCCESS);
 }
 
-void	set_booleans_of_t_options(char c, t_options *options)
+void	set_booleans_of_t_options(char *prog_name, char c, t_options *options)
 {
 	if (c == 'l')
 	   options->l = 1;
@@ -77,7 +74,7 @@ void	set_booleans_of_t_options(char c, t_options *options)
 		options->t = 1;
 	else
 	{
-		ft_printf(FT_LS_USAGE, c);
+		print_usage(prog_name, c);
 		exit (EXIT_FAILURE);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:20:28 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:42:51 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/05/30 16:04:50 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,10 @@ void	print_error(char *prog_name, char *av)
 			ft_memdel((void**)vas_ret);
 		}
 	}
+}
+
+void	print_usage(char *prog_name, char c)
+{
+	ft_printf("%s: illegal option -- %c\n"\
+			"usage: %s [-lRart] [file ...]\n", prog_name, c, prog_name);
 }
