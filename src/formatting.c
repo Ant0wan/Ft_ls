@@ -81,7 +81,7 @@ _Bool	get_what_is_in_the_dir(char *prog_name, char *av, t_options *options)
 	struct dirent	*ret_readdir;
 	t_dlist			*ptr_list_end;
 	t_dlist			*ptr_list_beg;
-
+	
 	if ((ret_opendir = opendir(av)) == NULL)
 	{
 		print_error(prog_name, av);
