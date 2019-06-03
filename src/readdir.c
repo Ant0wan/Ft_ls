@@ -16,7 +16,6 @@
 #include "dlist.h"
 #include "parser.h"
 
-
 t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 {
 	struct dirent	*ret_readdir;
@@ -37,8 +36,8 @@ t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 	}
 	if (!ret_readdir)
 		return (NULL);
-	else if (options->r)
-		return (end_list);
+//	else if (options->r) // sort done within sort function so no need to give other pointer
+//		return (end_list);
 	else
 		return (beg_list);
 }
