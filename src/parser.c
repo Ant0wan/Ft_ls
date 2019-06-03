@@ -71,8 +71,8 @@ int	parser(int argc, char **argv, t_options *options)
 	if (argv[i] && *argv[i] == '-' && *++argv[i] == '-')
 		++i;
 	if (i == argc)
-		ret_value |= get_what_is_in_the_dir(*argv, ".", options);
+		ret_value = get_what_is_in_the_dir(*argv, ".", options);
 	else
-		ret_value |= output_ls_of_each_argument(argc, argv, i, options);
+		ret_value = output_ls_of_each_argument(argc, argv, i, options);
 	return (ret_value);
 }
