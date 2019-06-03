@@ -31,7 +31,7 @@ void	set_booleans_of_t_options(char *prog_name, char c, t_options *options)
 	else
 	{
 		print_usage(prog_name, c);
-		exit (EXIT_FAILURE);
+		exit (SERIOUS);
 	}
 }
 
@@ -40,9 +40,9 @@ int	parse_options(char **argv, char *av, t_options *options)
 	if (av)
 	{
 		if (*av != '-')
-			return (EXIT_FAILURE);
+			return (SERIOUS);
 		if (++av && (*av == '-' || *av == '\0'))
-			return (EXIT_FAILURE);
+			return (SERIOUS);
 		else
 		{
 			while (av && *av)
@@ -50,11 +50,11 @@ int	parse_options(char **argv, char *av, t_options *options)
 				set_booleans_of_t_options(*argv, *av, options);
 				++av;
 			}
-			return (EXIT_SUCCESS);
+			return (OK);
 		}
 	}
 	else
-		return (EXIT_SUCCESS);
+		return (OK);
 }
 
 int	parser(int argc, char **argv, t_options *options)
@@ -63,13 +63,16 @@ int	parser(int argc, char **argv, t_options *options)
 	int	ret_value;
 
 	i = 1;
-	while (!(ret_value = parse_options(argv, argv[i], options)) && i < argc)
+	ret_value = 0;
+	ft_printf("<%d\n", ret_value); // DEBUGGING
+	while (!parse_options(argv, argv[i], options) && i < argc)
 		++i;
+	ft_printf(">%d\n", ret_value);// DEBUGGING
 	if (argv[i] && *argv[i] == '-' && *++argv[i] == '-')
 		++i;
 	if (i == argc)
-		ret_value = get_what_is_in_the_dir(*argv, ".", options);
+		ret_value |= get_what_is_in_the_dir(*argv, ".", options);
 	else
-		ret_value = output_ls_of_each_argument(argc, argv, i, options);
+		ret_value |= output_ls_of_each_argument(argc, argv, i, options);
 	return (ret_value);
 }
