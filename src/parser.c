@@ -63,10 +63,8 @@ int	parser(int argc, char **argv, t_options *options)
 
 	i = 1;
 	ret_value = 0;
-	ft_printf("<%d\n", ret_value); // DEBUGGING
 	while (!parse_options(argv, argv[i], options) && i < argc)
 		++i;
-	ft_printf(">%d\n", ret_value);// DEBUGGING
 	if (argv[i] && *argv[i] == '-' && *++argv[i] == '-')
 		++i;
 	if (i == argc)

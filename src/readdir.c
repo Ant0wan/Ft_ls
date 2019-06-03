@@ -12,7 +12,6 @@
 
 #include <dirent.h>
 #include <errno.h>
-#include <stdio.h>
 #include "error.h"
 #include "dlist.h"
 #include "parser.h"
@@ -30,7 +29,6 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 	next = NULL;
 	previous = NULL;
 	beg_list = NULL;
-	//beg_list = end_list;
 	(void)options;
 	while ((ret_readdir = readdir(ret_opendir)))
 	{
@@ -41,8 +39,6 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 	}
 	if (!ret_readdir)
 		return (NULL);
-//	else if (options->r) // sort done within sort function so no need to give other pointer
-//		return (end_list);
 	else
 		return (beg_list);
 }
@@ -57,12 +53,18 @@ static int	store_readdir_output(char *prog_name, char *path, t_options *options)
 	ret_opendir = opendir(path);
 	if (!ret_opendir)
 	{
-		ret_value = file_info(prog_name, path, options);
-		return (ret_value);
-	}
+		if (errno == ENOTDIR)
+			return (file_info(prog_name, path, options));
+		else
+		{
+			print_error(prog_name, path);
+			return (SERIOUS);
+		}
+	} // from this point it could be another function with valid dir only
 	dir_list = create_dir_list(ret_opendir, options);
-	if (!dir_list)
-		print_error(prog_name, path); // and free all lists for no leaks
+	(void)dir_list; // RESTART FROM HERE
+//	if (!dir_list)
+//		print_error(prog_name, path); // and free all lists for no leaks
 	return (ret_value);
 }
 
