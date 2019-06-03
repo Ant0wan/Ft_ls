@@ -17,8 +17,9 @@
 #include "dlist.h"
 #include "parser.h"
 #include "libft.h"
+#include "files.h"
 
-t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
+static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 {
 	struct dirent	*ret_readdir;
 	t_dlist		*next;
@@ -46,7 +47,7 @@ t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 		return (beg_list);
 }
 
-int	store_readdir_output(char *prog_name, char *path, t_options *options)
+static int	store_readdir_output(char *prog_name, char *path, t_options *options)
 {
 	DIR		*ret_opendir;
 	t_dlist		*dir_list;
@@ -56,8 +57,8 @@ int	store_readdir_output(char *prog_name, char *path, t_options *options)
 	ret_opendir = opendir(path);
 	if (!ret_opendir)
 	{
-		print_error(prog_name, path);
-		return (SERIOUS);
+		ret_value = file_info(prog_name, path, options);
+		return (ret_value);
 	}
 	dir_list = create_dir_list(ret_opendir, options);
 	if (!dir_list)
