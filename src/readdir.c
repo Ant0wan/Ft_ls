@@ -13,8 +13,10 @@
 #include <dirent.h>
 #include <errno.h>
 #include <stdio.h>
+#include "error.h"
 #include "dlist.h"
 #include "parser.h"
+#include "libft.h"
 
 t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 {
@@ -26,7 +28,9 @@ t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 
 	next = NULL;
 	previous = NULL;
-	beg_list = end_list;
+	beg_list = NULL;
+	//beg_list = end_list;
+	(void)options;
 	while ((ret_readdir = readdir(ret_opendir)))
 	{
 		// introduire ici le ascii sort en fonction de ret_readdir->d_name
@@ -46,14 +50,35 @@ int	store_readdir_output(char *prog_name, char *path, t_options *options)
 {
 	DIR		*ret_opendir;
 	t_dlist		*dir_list;
+	int		ret_value;
 
+	ret_value = 0;
 	ret_opendir = opendir(path);
 	if (!ret_opendir)
 	{
 		print_error(prog_name, path);
-		return (ERROR);
+		return (SERIOUS);
 	}
 	dir_list = create_dir_list(ret_opendir, options);
 	if (!dir_list)
-		print_error(); // and free all lists for no leaks
+		print_error(prog_name, path); // and free all lists for no leaks
+	return (ret_value);
+}
+
+int	feed_readdir_with_each_argument(int argc, char **argv, int i, t_options *options)
+{
+	int	ret_value;
+
+	ret_value = 0;
+	if (i == 0)
+		ret_value = store_readdir_output(*argv, ".", options);
+	else
+	{
+		while (i < argc)
+		{
+			ret_value = store_readdir_output(*argv, argv[i], options);
+			++i;
+		}
+	}
+	return (ret_value);
 }
