@@ -35,14 +35,14 @@ void	set_booleans_of_t_options(char *prog_name, char c, t_options *options)
 	}
 }
 
-int	parse_options(char **argv, char *av, t_options *options)
+_Bool	parse_options(char **argv, char *av, t_options *options)
 {
 	if (av)
 	{
 		if (*av != '-')
-			return (SERIOUS);
+			return (1);
 		if (++av && (*av == '-' || *av == '\0'))
-			return (SERIOUS);
+			return (1);
 		else
 		{
 			while (av && *av)
@@ -50,11 +50,11 @@ int	parse_options(char **argv, char *av, t_options *options)
 				set_booleans_of_t_options(*argv, *av, options);
 				++av;
 			}
-			return (OK);
+			return (0);
 		}
 	}
 	else
-		return (OK);
+		return (0);
 }
 
 int	parser(int argc, char **argv, t_options *options)
