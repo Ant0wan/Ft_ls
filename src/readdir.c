@@ -23,12 +23,10 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 	struct dirent	*ret_readdir;
 	t_dlist		*next;
 	t_dlist		*previous;
-	t_dlist		*beg_list;
-	t_dlist		*end_list; // for the case -r
+	t_dlist		*end_list;
 
 	next = NULL;
 	previous = NULL;
-	beg_list = NULL;
 	(void)options;
 	while ((ret_readdir = readdir(ret_opendir)))
 	{
@@ -40,7 +38,7 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 	if (!ret_readdir)
 		return (NULL);
 	else
-		return (beg_list);
+		return (end_list);
 }
 
 static int	store_readdir_output(char *prog_name, char *path, t_options *options)
