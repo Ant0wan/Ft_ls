@@ -60,21 +60,16 @@ int	parse_options(char **argv, char *av, t_options *options)
 int	parser(int argc, char **argv, t_options *options)
 {
 	int	i;
+	int	ret_value;
 
 	i = 1;
-	while (!parse_options(argv, argv[i], options) && i < argc)
+	while (!(ret_value = parse_options(argv, argv[i], options)) && i < argc)
 		++i;
 	if (argv[i] && *argv[i] == '-' && *++argv[i] == '-')
 		++i;
 	if (i == argc)
-	{
-		if (get_what_is_in_the_dir(*argv, ".", options) == OK)
-			return (OK);
-	}
+		ret_value = get_what_is_in_the_dir(*argv, ".", options);
 	else
-	{
-		if (output_ls_of_each_argument(argc, argv, i, options) == OK)
-			return (OK);
-	}
-	return (SERIOUS);
+		ret_value = output_ls_of_each_argument(argc, argv, i, options);
+	return (ret_value);
 }
