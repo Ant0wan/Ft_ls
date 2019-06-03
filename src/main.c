@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "parser.h"
 
 int	main(int argc, char **argv)
@@ -19,8 +17,5 @@ int	main(int argc, char **argv)
 	t_options	options;
 
 	options = (t_options){.l = 0, .upr = 0, .a = 0, .r = 0, .t = 0};
-	if (!parser(argc, argv, &options))
-		return (EXIT_FAILURE);
-	else
-		return (EXIT_SUCCESS);
+	return (parser(argc, argv, &options));
 }
