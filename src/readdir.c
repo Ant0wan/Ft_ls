@@ -48,7 +48,7 @@ static int	store_readdir_output(char *prog_name, char *path, t_options *options)
 	}
 	dir_list = create_dir_list(ret_opendir, options);
 	if (options->upr)
-		ft_printf("> %s:\n", path);
+		ft_printf("%s:\n", path);
 	ret_value = display_list_content(dir_list, options);
 	return (ret_value);
 }

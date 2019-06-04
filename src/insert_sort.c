@@ -17,47 +17,47 @@
 #include "parser.h"
 #include "libft.h"
 #include "files.h"
-#include "display.h"
-
-//static int	compare(t_dlist *s1, t_dlist *s2, t_options *options)
-//{	
-//	(void)options; // will sort with time, ascii and -r reverse when needed
-//	if (!s1)
-//		return (0);
-//	else if (!s2)
-//		return (0);
-//	else if (ft_strcmp(s1->s_dir->d_name, s2->s_dir->d_name) > 0)
-////	if (ft_strcmp(s1, s2) > 0)
-//		return (1);
-//	else
-//		return (0);
-//}
 
 t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *options)
 {
 	static t_dlist	*beg_list;
 	static t_dlist	*voyager;
+	t_dlist		*new;
 
 	if (!list)
 	{
 		list = create_node(NULL, NULL, ret_readdir);
+		ft_printf("FILE:%s\n", ret_readdir->d_name);
 		beg_list = list;
 		voyager = list;
 	}
-	else
+	else // What if a malloc fail ?
 	{
 		(void)options;
-		// FAUX ici car concevoir le tri a l'insertion
-	//	while (voyager)
-	//	{
-	//		if (compare(voyager->previous, voyager, options) > 0)
-	//			voyager = voyager->next;
-	//		else
-	//			voyager = voyager->previous;
-	//	}
-		voyager->next = create_node(list, NULL, ret_readdir);
-	//	voyager = create_node(list, NULL, ret_readdir);
-		voyager = voyager->next;
+		while (voyager->previous && ft_strcmp(ret_readdir->d_name, voyager->s_dir->d_name) < 0)
+		{
+			voyager = voyager->previous;
+		}
+		while (voyager->next && ft_strcmp(ret_readdir->d_name, voyager->s_dir->d_name) > 0)
+		{
+			voyager = voyager->next;
+		}
+		if (!voyager->previous)
+		{
+			voyager->previous = create_node(NULL, voyager, ret_readdir);
+			voyager = voyager->previous;
+			beg_list = voyager;
+		}
+		else
+		{
+			new = create_node(voyager->previous, voyager, ret_readdir);
+			voyager->previous->next = new;
+			voyager->previous = new;
+		}
+	}
+	if (beg_list->previous != NULL)
+	{
+		beg_list = beg_list->previous;
 	}
 	return (beg_list);
 }
