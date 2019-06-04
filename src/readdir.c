@@ -19,6 +19,20 @@
 #include "files.h"
 #include "display.h"
 
+//static int	compare(t_dlist *s1, t_dlist *s2, t_options *options)
+//{	
+//	(void)options; // will sort with time, ascii and -r reverse when needed
+//	if (!s1)
+//		return (0);
+//	else if (!s2)
+//		return (0);
+//	else if (ft_strcmp(s1->s_dir->d_name, s2->s_dir->d_name) > 0)
+////	if (ft_strcmp(s1, s2) > 0)
+//		return (1);
+//	else
+//		return (0);
+//}
+
 static t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *options)
 {
 	static t_dlist	*beg_list;
@@ -34,7 +48,15 @@ static t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options
 	{
 		(void)options;
 		// FAUX ici car concevoir le tri a l'insertion
+	//	while (voyager)
+	//	{
+	//		if (compare(voyager->previous, voyager, options) > 0)
+	//			voyager = voyager->next;
+	//		else
+	//			voyager = voyager->previous;
+	//	}
 		voyager->next = create_node(list, NULL, ret_readdir);
+	//	voyager = create_node(list, NULL, ret_readdir);
 		voyager = voyager->next;
 	}
 	return (beg_list);
