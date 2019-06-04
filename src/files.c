@@ -33,10 +33,7 @@ int	file_info(char *prog_name, char *path, t_options *options)
 	
 	ret_value = 0;
 	if (stat(path, &statbuf))
-	{
-		print_error(prog_name, path);
-		return (SERIOUS);
-	}
+		return (print_error(prog_name, path));
 	else
 	{
 		ret_value = print_file_info(prog_name, path, options, &statbuf);

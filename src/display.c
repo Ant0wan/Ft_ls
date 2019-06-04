@@ -18,16 +18,22 @@
 #include "libft.h"
 #include "dlist.h"
 
-void	display_list_content(t_dlist *list, t_options *options)
+int	display_list_content(t_dlist *list, t_options *options)
 {
 	(void)options;
-	while (list)
+	if (!list)
+		return (SERIOUS);
+	else
 	{
-		if (ft_printf("%s\n", list->s_dir->d_name) < 0)
+		while (list)
 		{
-			print_error(NULL, NULL);
-			free_entire_dlist(list);
+			if (ft_printf("%s\n", list->s_dir->d_name) < 0)
+			{
+				free_entire_dlist(list);
+				return (print_error(NULL, NULL));
+			}
+			list = list->next;
 		}
-		list = list->next;
+		return (OK);
 	}
 }

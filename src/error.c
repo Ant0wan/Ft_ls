@@ -17,7 +17,7 @@
 #include "error.h"
 #include "libft.h"
 
-void	print_error(char *prog_name, char *av)
+int	print_error(char *prog_name, char *av)
 {
 	char	*vas_ret;
 	
@@ -34,13 +34,15 @@ void	print_error(char *prog_name, char *av)
 	{
 		perror(NULL);
 	}
+	return (SERIOUS);
 }
 
-void	print_usage(char *prog_name, char c)
+int	print_usage(char *prog_name, char c)
 {
 	if (!ft_dprintf(STDERR_FILENO, "%s: illegal option -- %c\n"\
 			"usage: %s [-lRart] [file ...]\n", prog_name, c, prog_name))
 	{
 		perror(NULL);
 	}
+	return (SERIOUS);
 }

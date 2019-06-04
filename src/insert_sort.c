@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readdir.c                                          :+:      :+:    :+:   */
+/*   insert_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -33,7 +33,7 @@
 //		return (0);
 //}
 
-static t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *options)
+t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *options)
 {
 	static t_dlist	*beg_list;
 	static t_dlist	*voyager;
@@ -60,54 +60,4 @@ static t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options
 		voyager = voyager->next;
 	}
 	return (beg_list);
-}
-
-static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
-{
-	struct dirent	*ret_readdir;
-	t_dlist		*list;
-
-	list = NULL;
-	while ((ret_readdir = readdir(ret_opendir)))
-		list = insert_sort(list, ret_readdir, options);
-	return (list);
-}
-
-static int	store_readdir_output(char *prog_name, char *path, t_options *options)
-{
-	DIR		*ret_opendir;
-	t_dlist		*dir_list;
-	int		ret_value;
-
-	ret_value = 0;
-	ret_opendir = opendir(path);
-	if (!ret_opendir)
-	{
-		if (errno == ENOTDIR)
-			return (file_info(prog_name, path, options));
-		else
-			return (print_error(prog_name, path));
-	}
-	dir_list = create_dir_list(ret_opendir, options);
-	if (!dir_list)
-		return (print_error(NULL, NULL));
-	ft_printf("> %s:\n", path);
-	ret_value = display_list_content(dir_list, options);
-	return (ret_value);
-}
-
-int	feed_readdir_with_each_argument(int argc, char **argv, int i, t_options *options)
-{
-	int	ret_value;
-
-	ret_value = 0;
-	if (i == 0)
-		ret_value = store_readdir_output(*argv, ".", options);
-	else
-		while (i < argc)
-		{
-			ret_value = store_readdir_output(*argv, argv[i], options);
-			++i;
-		}
-	return (ret_value);
 }
