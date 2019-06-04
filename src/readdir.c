@@ -17,28 +17,43 @@
 #include "parser.h"
 #include "libft.h"
 #include "files.h"
+#include "display.h"
+
+static t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *options)
+{
+	static t_dlist	*beg_list;
+	static t_dlist	*voyager;
+
+	if (!list)
+	{
+		list = create_node(NULL, NULL, ret_readdir);
+		beg_list = list;
+		voyager = list;
+	}
+	else
+	{
+		(void)options;
+		// FAUX ici car concevoir le tri a l'insertion
+		voyager->next = create_node(list, NULL, ret_readdir);
+		voyager = voyager->next;
+	}
+	return (beg_list);
+}
 
 static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 {
 	struct dirent	*ret_readdir;
-	t_dlist		*next;
-	t_dlist		*previous;
-	t_dlist		*end_list;
+	t_dlist		*list;
 
-	next = NULL;
-	previous = NULL;
-	(void)options;
+	list = NULL;
 	while ((ret_readdir = readdir(ret_opendir)))
 	{
-		// introduire ici le ascii sort en fonction de ret_readdir->d_name
-		end_list = create_node(previous, next, ret_readdir);
-		ft_printf("%s\n", end_list->s_dir->d_name); // debugging
-		// create a list with what is in the dir
+		list = insert_sort(list, ret_readdir, options);
 	}
-	if (!ret_readdir)
+	if (!list)
 		return (NULL);
 	else
-		return (end_list);
+		return (list);
 }
 
 static int	store_readdir_output(char *prog_name, char *path, t_options *options)
@@ -57,11 +72,12 @@ static int	store_readdir_output(char *prog_name, char *path, t_options *options)
 		{
 			print_error(prog_name, path);
 			return (SERIOUS);
+			//return (MINOR);
 		}
-	} // from this point it could be another function with valid dir only
+	}
 	dir_list = create_dir_list(ret_opendir, options);
-	(void)dir_list; // RESTART FROM HERE
-//	if (!dir_list)
+	display_list_content(dir_list, options);
+//	if (!dir_list) la recurssion se fera par ici avec un dir_list null pour signaler un dossier vide
 //		print_error(prog_name, path); // and free all lists for no leaks
 	return (ret_value);
 }
