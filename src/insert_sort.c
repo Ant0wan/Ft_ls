@@ -18,6 +18,18 @@
 #include "libft.h"
 #include "files.h"
 
+static int	ft_lscmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (ft_tolower((int)s1[i]) == ft_tolower((int)s2[i]) && s1[i] && s2[i])
+	{
+		++i;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
 t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *options)
 {
 	static t_dlist	*beg_list;
@@ -27,18 +39,18 @@ t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *optio
 	if (!list)
 	{
 		list = create_node(NULL, NULL, ret_readdir);
-		ft_printf("FILE:%s\n", ret_readdir->d_name);
+		ft_printf("FILE:%s\n", ret_readdir->d_name); //DEBUGG
 		beg_list = list;
 		voyager = list;
 	}
 	else // What if a malloc fail ?
 	{
 		(void)options;
-		while (voyager->previous && ft_strcmp(ret_readdir->d_name, voyager->s_dir->d_name) < 0)
+		while (voyager->previous && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name) < 0)
 		{
 			voyager = voyager->previous;
 		}
-		while (voyager->next && ft_strcmp(ret_readdir->d_name, voyager->s_dir->d_name) > 0)
+		while (voyager->next && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name) > 0)
 		{
 			voyager = voyager->next;
 		}
