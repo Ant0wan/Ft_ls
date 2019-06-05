@@ -34,12 +34,8 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 
 static char	*concat_path(char *path, char *d_name)
 {
-	int	i;
 	char	*full_path;
 
-	i = 0;
-	while (path[i])
-		++i;
 	full_path = ft_strjoin(path, "/"); // LEAKS DE LA MORT
 	full_path = ft_strjoin(full_path, d_name);
 	return (full_path);
@@ -87,6 +83,7 @@ int	store_readdir_output(char *prog_name, char *path, t_options *options)
 	ret_value = display_list_content(dir_list, options);
 	if (options->upr)
 		ret_value = subdir_select(prog_name, path, options, dir_list);
+	closedir(ret_opendir);
 	return (ret_value);
 }
 
