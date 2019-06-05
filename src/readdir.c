@@ -32,6 +32,19 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 	return (list);
 }
 
+static char	*concat_path(char *path, char *d_name)
+{
+	int	i;
+	char	*full_path;
+
+	i = 0;
+	while (path[i])
+		++i;
+	full_path = ft_strjoin(path, "/"); // LEAKS DE LA MORT
+	full_path = ft_strjoin(full_path, d_name);
+	return (full_path);
+}
+
 static int	subdir_select(char *prog_name, char *path, t_options *options, t_dlist *list)
 {
 	int	ret_value;
@@ -44,8 +57,10 @@ static int	subdir_select(char *prog_name, char *path, t_options *options, t_dlis
 			list = list->next;
 		if (list)
 		{
-			full_path = list->s_dir->d_name;
+			full_path = concat_path(path, list->s_dir->d_name);
+			ft_printf("\n%s:\n", full_path);
 			ret_value = store_readdir_output(prog_name, full_path, options) ? 1 : 0;
+			ft_memdel((void**)&full_path);
 			list = list->next;
 		}
 		(void)path;
