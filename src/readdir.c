@@ -19,6 +19,7 @@
 #include "files.h"
 #include "display.h"
 #include "insert_sort.h"
+#include "readdir.h"
 
 static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 {
@@ -39,18 +40,20 @@ static int	subdir_select(char *prog_name, char *path, t_options *options, t_dlis
 	ret_value = 0;
 	while (list)
 	{
-		if (list->s_dir->d_type != DT_DIR || ft_strcmp(".", list->s_dir->d_name) || ft_strcmp("..", list->s_dir->d_name))
+		while (list && (list->s_dir->d_type != DT_DIR || !ft_strcmp(".", list->s_dir->d_name) || !ft_strcmp("..", list->s_dir->d_name)))
 			list = list->next;
-//		ret_value = 
-		(void)prog_name;
+		if (list)
+		{
+			full_path = list->s_dir->d_name;
+			ret_value = store_readdir_output(prog_name, full_path, options) ? 1 : 0;
+			list = list->next;
+		}
 		(void)path;
-		(void)options;
-		(void)full_path;
 	}
 	return (ret_value);
 }
 
-static int	store_readdir_output(char *prog_name, char *path, t_options *options)
+int	store_readdir_output(char *prog_name, char *path, t_options *options)
 {
 	DIR		*ret_opendir;
 	t_dlist		*dir_list;
