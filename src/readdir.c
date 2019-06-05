@@ -31,6 +31,25 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 	return (list);
 }
 
+static int	subdir_select(char *prog_name, char *path, t_options *options, t_dlist *list)
+{
+	int	ret_value;
+	char	*full_path;
+
+	ret_value = 0;
+	while (list)
+	{
+		if (list->s_dir->d_type != DT_DIR || ft_strcmp(".", list->s_dir->d_name) || ft_strcmp("..", list->s_dir->d_name))
+			list = list->next;
+//		ret_value = 
+		(void)prog_name;
+		(void)path;
+		(void)options;
+		(void)full_path;
+	}
+	return (ret_value);
+}
+
 static int	store_readdir_output(char *prog_name, char *path, t_options *options)
 {
 	DIR		*ret_opendir;
@@ -47,9 +66,9 @@ static int	store_readdir_output(char *prog_name, char *path, t_options *options)
 			return (print_error(prog_name, path));
 	}
 	dir_list = create_dir_list(ret_opendir, options);
-	if (options->upr)
-		ft_printf("%s:\n", path);
 	ret_value = display_list_content(dir_list, options);
+	if (options->upr)
+		ret_value = subdir_select(prog_name, path, options, dir_list);
 	return (ret_value);
 }
 

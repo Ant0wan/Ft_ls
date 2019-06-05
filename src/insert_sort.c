@@ -55,9 +55,9 @@ t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *optio
 	{
 		while (voyager->previous && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name, options) < 0)
 			voyager = voyager->previous;
-		while (voyager->next && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name, options) > 0)
+		while (voyager->next && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name, options) >= 0)
 			voyager = voyager->next;
-		if (!voyager->previous && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name, options) <= 0)
+		if (!voyager->previous && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name, options) < 0)
 		{
 			voyager->previous = create_node(NULL, voyager, ret_readdir);
 			voyager = voyager->previous;
