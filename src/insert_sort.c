@@ -18,7 +18,7 @@
 #include "libft.h"
 #include "files.h"
 
-static int	ft_lscmp(const char *s1, const char *s2)
+static int	ft_lscmp(const char *s1, const char *s2, t_options *options)
 {
 	int	i;
 	int	a;
@@ -33,7 +33,10 @@ static int	ft_lscmp(const char *s1, const char *s2)
 		a = ft_tolower((int)s1[i]);
 		b = ft_tolower((int)s2[i]);
 	}
-	return ((unsigned char)a - (unsigned char)b);
+	if (options->r)
+		return ((unsigned char)b - (unsigned char)a);
+	else
+		return ((unsigned char)a - (unsigned char)b);
 }
 
 t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *options)
@@ -50,18 +53,17 @@ t_dlist	*insert_sort(t_dlist *list, struct dirent *ret_readdir, t_options *optio
 	}
 	else // What if a malloc fail ?
 	{
-		(void)options;
-		while (voyager->previous && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name) < 0)
+		while (voyager->previous && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name, options) < 0)
 			voyager = voyager->previous;
-		while (voyager->next && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name) > 0)
+		while (voyager->next && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name, options) > 0)
 			voyager = voyager->next;
-		if (!voyager->previous && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name) <= 0)
+		if (!voyager->previous && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name, options) <= 0)
 		{
 			voyager->previous = create_node(NULL, voyager, ret_readdir);
 			voyager = voyager->previous;
 			beg_list = voyager;
 		}
-		else if (!voyager->next && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name) >= 0)
+		else if (!voyager->next && ft_lscmp(ret_readdir->d_name, voyager->s_dir->d_name, options) >= 0)
 		{
 			voyager->next = create_node(voyager, NULL, ret_readdir);
 			voyager = voyager->next;
