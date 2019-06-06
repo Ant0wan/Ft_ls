@@ -6,13 +6,12 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/31 18:13:22 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/06 08:50:52 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/stat.h>
-#include <errno.h>
 #include <stdlib.h>
+#include <errno.h>
 #include "error.h"
 #include "parser.h"
 #include "libft.h"

@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:59:52 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/06 08:54:41 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 #include "readdir.h"
 #include "error.h"
 
-void	set_booleans_of_t_options(char *prog_name, char c, t_options *options)
+static void		set_booleans_of_t_options(char *prog_name, char c,
+		t_options *options)
 {
 	if (c == 'l')
-	   options->l = 1;
+		options->l = 1;
 	else if (c == 'R')
-	   options->upr = 1;
+		options->upr = 1;
 	else if (c == 'a')
 		options->a = 1;
 	else if (c == 'r')
@@ -30,11 +31,11 @@ void	set_booleans_of_t_options(char *prog_name, char c, t_options *options)
 	else
 	{
 		print_usage(prog_name, c);
-		exit (SERIOUS);
+		exit(SERIOUS);
 	}
 }
 
-_Bool	parse_options(char **argv, char *av, t_options *options)
+static _Bool	parse_options(char **argv, char *av, t_options *options)
 {
 	if (av)
 	{
@@ -56,7 +57,7 @@ _Bool	parse_options(char **argv, char *av, t_options *options)
 		return (0);
 }
 
-int	parser(int argc, char **argv, t_options *options)
+int				parser(int argc, char **argv, t_options *options)
 {
 	int	i;
 	int	ret_value;

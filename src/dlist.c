@@ -6,12 +6,12 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:55:09 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/28 14:27:17 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/06 08:51:05 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
+#include <errno.h>
 #include "libft.h"
 #include "dlist.h"
 

@@ -6,21 +6,21 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:20:28 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/30 18:12:52 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/06 08:51:30 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
 #include "error.h"
 #include "libft.h"
 
 int	print_error(char *prog_name, char *av)
 {
 	char	*vas_ret;
-	
+
 	if (av)
 	{
 		ft_asprintf(&vas_ret, "%s: %s", prog_name, av);

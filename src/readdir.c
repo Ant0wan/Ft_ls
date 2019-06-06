@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/31 18:13:22 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/06 08:58:08 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 {
 	struct dirent	*ret_readdir;
-	t_dlist		*list;
+	t_dlist			*list;
 
 	list = NULL;
 	while ((ret_readdir = readdir(ret_opendir)))
@@ -32,30 +32,34 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 	return (list);
 }
 
-static char	*concat_path(char *path, char *d_name)
+static char		*concat_path(char *path, char *d_name)
 {
 	char	*full_path;
 
-	full_path = ft_strjoin(path, "/"); // LEAKS DE LA MORT
+	full_path = ft_strjoin(path, "/"); // LEAKS DE LA MORT ET FONCTION DE MERDE
 	full_path = ft_strjoin(full_path, d_name);
 	return (full_path);
 }
 
-static int	subdir_select(char *prog_name, char *path, t_options *options, t_dlist *list)
+static int		subdir_select(char *prog_name, char *path, t_options *options,
+		t_dlist *list)
 {
-	int	ret_value;
 	char	*full_path;
+	int		ret_value;
 
 	ret_value = 0;
 	while (list)
 	{
-		while (list && (list->s_dir->d_type != DT_DIR || !ft_strcmp(".", list->s_dir->d_name) || !ft_strcmp("..", list->s_dir->d_name)))
+		while (list && (list->s_dir->d_type != DT_DIR
+					|| !ft_strcmp(".", list->s_dir->d_name)
+					|| !ft_strcmp("..", list->s_dir->d_name)))
 			list = list->next;
 		if (list)
 		{
 			full_path = concat_path(path, list->s_dir->d_name);
 			ft_printf("\n%s:\n", full_path);
-			ret_value = store_readdir_output(prog_name, full_path, options) ? 1 : 0;
+			ret_value = store_readdir_output(prog_name, full_path, options)
+				? 1 : ret_value;
 			ft_memdel((void**)&full_path);
 			list = list->next;
 		}
@@ -64,10 +68,11 @@ static int	subdir_select(char *prog_name, char *path, t_options *options, t_dlis
 	return (ret_value);
 }
 
-int	store_readdir_output(char *prog_name, char *path, t_options *options)
+int				store_readdir_output(char *prog_name, char *path,
+		t_options *options)
 {
 	DIR		*ret_opendir;
-	t_dlist		*dir_list;
+	t_dlist	*dir_list;
 	int		ret_value;
 
 	ret_value = 0;
@@ -87,7 +92,8 @@ int	store_readdir_output(char *prog_name, char *path, t_options *options)
 	return (ret_value);
 }
 
-int	feed_readdir_with_each_argument(int argc, char **argv, int i, t_options *options)
+int				feed_readdir_with_each_argument(int argc, char **argv, int i,
+		t_options *options)
 {
 	int	ret_value;
 
