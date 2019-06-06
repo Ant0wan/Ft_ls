@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/06 09:36:09 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:52:55 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,26 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options *options)
 static char		*concat_path(char *path, char *d_name)
 {
 	char	*full_path;
-	
-	full_path = ft_strjoin(path, "/"); // LEAKS DE LA MORT ET FONCTION DE MERDE
-	full_path = ft_strjoin(full_path, d_name);
-	return (full_path);
+	char	*beg_path;
+
+	if (path && d_name)
+	{
+		full_path = (char*)malloc(sizeof(*full_path) * (ft_strlen(path) + 1
+					+ ft_strlen(d_name)) + 1);
+		if (!full_path)
+		{
+			print_error(NULL, NULL);
+			return (NULL);
+		}
+	}
+	else
+		return (NULL);
+	beg_path = full_path;
+	full_path = ft_strendcpy(full_path, path);
+	full_path = ft_strendcpy(full_path, "/");
+	full_path = ft_strendcpy(full_path, d_name);
+//	// LEAKS DE LA MORT ET FONCTION DE MERDE
+	return (beg_path);
 }
 
 static int		subdir_select(char *prog_name, char *path, t_options *options,
@@ -50,20 +66,19 @@ static int		subdir_select(char *prog_name, char *path, t_options *options,
 	ret_value = 0;
 	while (list)
 	{
-		while (list && (list->s_dir->d_type != DT_DIR
-					|| !ft_strcmp(".", list->s_dir->d_name)
-					|| !ft_strcmp("..", list->s_dir->d_name)))
+		while (list && (list->s_dir.d_type != DT_DIR
+					|| !ft_strcmp(".", list->s_dir.d_name)
+					|| !ft_strcmp("..", list->s_dir.d_name)))
 			list = list->next;
 		if (list)
 		{
-			full_path = concat_path(path, list->s_dir->d_name);
+			full_path = concat_path(path, list->s_dir.d_name);
 			ft_printf("\n%s:\n", full_path);
 			ret_value = store_readdir_output(prog_name, full_path, options)
 				? 1 : ret_value;
 			ft_memdel((void**)&full_path);
 			list = list->next;
 		}
-		(void)path;
 	}
 	return (ret_value);
 }
@@ -88,6 +103,7 @@ int				store_readdir_output(char *prog_name, char *path,
 	ret_value = display_list_content(dir_list, options);
 	if (options->upr)
 		ret_value = subdir_select(prog_name, path, options, dir_list);
+	free_entire_dlist(dir_list);
 	closedir(ret_opendir);
 	return (ret_value);
 }
@@ -95,7 +111,7 @@ int				store_readdir_output(char *prog_name, char *path,
 int				feed_readdir_with_each_argument(int argc, char **argv, int i,
 		t_options *options)
 {
-	int	ret_value;
+	int		ret_value;
 
 	ret_value = 0;
 	if (i == 0)

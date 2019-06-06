@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:20:28 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/06 08:51:30 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:51:23 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ int	print_error(char *prog_name, char *av)
 	{
 		ft_asprintf(&vas_ret, "%s: %s", prog_name, av);
 		perror(vas_ret);
-		if (!vas_ret)
-		{
-			ft_memdel((void**)vas_ret);
-		}
+		if (vas_ret != NULL)
+			free(vas_ret);
 	}
 	else
 	{
