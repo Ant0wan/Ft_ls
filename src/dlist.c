@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:55:09 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/06 15:03:52 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/06 16:12:32 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_dlist			*create_node(t_dlist *previous, t_dlist *next,
 	{
 		new->next = next;
 		new->previous = previous;
+		//	ft_memcpy(&new->s_dir, s_dir, sizeof(struct dirent));
 		new->s_dir = *s_dir;
 		return (new);
 	}
