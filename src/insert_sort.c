@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/05/31 18:13:22 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/06 09:33:05 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 static int	ft_lscmp(const char *s1, const char *s2, t_options *options)
 {
-	int	i;
-	int	a;
-	int	b;
+	size_t	i;
+	int		a;
+	int		b;
 
 	i = 0;
 	a = ft_tolower((int)s1[i]);
