@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/23 17:18:43 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/23 17:52:02 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ static int	classic_display(t_dlist *list)
 int			display_list_content(t_dlist *list, t_options options, char *path,
 									int first)
 {
+//	t_dlist *tmp = list;
+//	while (tmp)
+//	{
+//	ft_printf("IN DISPLAY LIST path = %s | name = %s | first = %i\n",
+//			path, tmp->d_name, first);
+//	tmp = tmp->next;
+//	}
 	if (!list)
 		return (print_error(NULL, NULL));
 	else if (options.l)

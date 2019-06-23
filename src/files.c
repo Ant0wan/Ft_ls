@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/23 17:20:53 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/23 17:52:20 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		file_info(char *prog_name, char *path, t_options options, int first)
 	else
 	{
 		ft_init_var(&var_tmp, &statbuf, &first, path);
-		ft_printf("path = %s | first = %i\n", path, first);
+//		ft_printf("IN FILE INFO path = %s | first = %i\n", path, first);
 		display_list_content(&var_tmp, options, path, first);
 		ft_strdel(&var_tmp.gr_name);
 		ft_strdel(&var_tmp.usr_name);
