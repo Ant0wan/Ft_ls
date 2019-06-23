@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:55:09 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/22 21:32:15 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/23 15:30:56 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_dlist					*create_node(t_dlist *restrict previous,
 		new->next = next;
 		new->previous = previous;
 		new->d_name = ft_strdup(s_dir->d_name);
-	//	new->linkname =  NULL;
 		new->linkname[0] = '\0';
 		new->gr_name = NULL;
 		new->usr_name = NULL;
@@ -71,7 +70,6 @@ void					free_entire_dlist(t_dlist *restrict somewhere_in_dlist)
 //		ft_printf("gr_name freed\n");
 		ft_memdel((void**)&somewhere_in_dlist->usr_name);
 //		ft_printf("usr_name freed\n");
-	//	ft_memdel((void**)&somewhere_in_dlist->linkname);
 		free(somewhere_in_dlist);
 		somewhere_in_dlist = tmp;
 	}

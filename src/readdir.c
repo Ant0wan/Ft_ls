@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/23 15:00:13 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/23 15:26:42 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ char			*concat_path(char *path, char *d_name)
 static int		subdir_select(char *prog_name, char *path, t_options options,
 		t_dlist *list)
 {
-	char	*full_path;
-	int		ret_value;
+	char		*full_path;
+	int			ret_value;
 	struct stat test;
-	char	*tmp;
+	char		*tmp;
 
 	ret_value = 0;
 	while (list)

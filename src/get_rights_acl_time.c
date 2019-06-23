@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 12:56:48 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/23 15:23:14 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/23 15:24:13 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char		ft_get_file_type(struct stat *statbuf)
 	return ('-');
 }
 
-static char		ft_get_acl(char *path, int *i)
+static char	ft_get_acl(char *path, int *i)
 {
 	ssize_t		xattr;
 	acl_t		acl;
@@ -85,7 +85,7 @@ void		ft_get_file_rights(t_dlist *tmp, char *path, int *i)
 	tmp->rights[11] = '\0';
 }
 
-int		ft_file_time(time_t date)
+int			ft_file_time(time_t date)
 {
 	long int	current_time;
 
