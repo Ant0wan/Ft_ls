@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILESANDOUTPUT="cplinfos.c get_rights_acl_time.c ft_nb_len.c l_display.c loption.c sortargv.c compare.c parser.c parser2.c insert.c dlist.c readdir.c readdir2.c files.c display.c main.c error.c -I../libft/include -I../include ../libft/libft.a -o ft_ls"
+FILESANDOUTPUT="l_display_beg.c cplinfos.c get_rights_acl_time.c l_display.c loption.c sortargv.c compare.c parser.c parser2.c insert.c dlist.c readdir.c readdir2.c files.c display.c main.c error.c -I../libft/include -I../include ../libft/libft.a -o ft_ls"
 
 if [ $# -eq 0 ]
 	then

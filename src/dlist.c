@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:55:09 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/23 15:30:56 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/23 16:11:26 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,9 @@ void					free_entire_dlist(t_dlist *restrict somewhere_in_dlist)
 	while (somewhere_in_dlist)
 	{
 		tmp = somewhere_in_dlist->previous;
-//		ft_printf("Starting the memdels\n");
 		ft_memdel((void**)&somewhere_in_dlist->d_name);
-//		ft_printf("d_name freed\n");
 		ft_memdel((void**)&somewhere_in_dlist->gr_name);
-//		ft_printf("gr_name freed\n");
 		ft_memdel((void**)&somewhere_in_dlist->usr_name);
-//		ft_printf("usr_name freed\n");
 		free(somewhere_in_dlist);
 		somewhere_in_dlist = tmp;
 	}
