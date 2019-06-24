@@ -1,0 +1,15 @@
+-a
+-R
+-r
+-t
+~/
+../
+-R ../
+-R ~/
+-Rrat ../
+-Rrat ~/
+-- -R
+-- -R ..
+/dev/
+-- input-ls -R .. ok
+--  -R .. ok
