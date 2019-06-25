@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/23 17:52:20 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/25 11:41:22 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	ft_init_var(t_dlist *var, struct stat *statbuf, int *first,
 	var->statbuf = *statbuf;
 	var->previous = NULL;
 	var->next = NULL;
+	var->rights[0] = '\0';
+	var->linkname[0] = '\0';
 	var->d_name = path;
+	var->gr_name = NULL;
+	var->usr_name = NULL;
 	if (ft_get_file_type(statbuf) != 'd')
 		*first = 4;
 }
