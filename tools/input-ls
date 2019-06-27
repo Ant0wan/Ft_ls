@@ -19,11 +19,11 @@
 -l -rat ../
 -l -Rrat ../
 -l -lrat ~/
--l -lRrat ~/
+#-l -lRrat ~/
 -l -- 
--l --  ..
 -l /dev/
 -l -- input-ls  .. ok
 -l --  .. ok
 -l -- linkprout linkprout/
 -Rl -- linkprout linkprout/
+-lR

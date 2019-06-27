@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 14:50:35 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/25 15:09:49 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:03:12 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	ft_print_maj_min(t_dlist *list)
 
 	minor = 0xFFFF & list->statbuf.st_rdev;
 	major = 0xFF & (list->statbuf.st_rdev >> 24);
-	if (ft_printf("  %3u,%4u ", major, minor) < 0)
+	if (ft_printf("%3u,%4u ", major, minor) < 0)
 	{
 		free_entire_dlist(list);
 		return (print_error(NULL, NULL));
