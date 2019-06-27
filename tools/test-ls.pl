@@ -16,6 +16,8 @@ use strict;
 use 5.010;
 use Term::ANSIColor;
 
+# Set path of ft_ls
+
 sub logError{
 
 	my $digits = sprintf("%02d", $_[2]); 
@@ -33,6 +35,10 @@ sub logError{
 	# Comment these two lines to avoid making the diff and removing output files
 	system("diff ${filename1} ${filename2} > diff_test${digits}.log");
 	system("rm -f error_*");
+
+	# Display diff for log to be caputre in Travis.ci log
+	system("cat diff_test${digits}.log"); # Comment these two lines
+	system("rm -f diff_*");               # if you want to a diff.log file
 }
 
 sub compareOutput{
@@ -43,21 +49,19 @@ sub compareOutput{
 	if (($ftlsOutput ne $lsOutput))
 	{
 		print colored( 'KO', 'red' ), "\n";
-		#print "\t\t", colored('ls output:', 'red underline'), "\n";
-		#print "$lsOutput";
-		#print "\t\t", colored('./ft_ls output:', 'red underline'), "\n";
-		#print "$ftlsOutput";
 		logError($lsOutput, $ftlsOutput, $_[2]);
+		return (1);
 	}
 	else
 	{
 		print colored( 'OK', 'green' ), "\n";
+		return (0);
 	}
 }
 
 sub testFile{
 
-	if (not -e '../src/ft_ls') {
+	if (not -e './ft_ls') {
 		print colored( 'ft_ls does not exist, please compile it !', 'red' ), "\n";
 		exit(1);
 	}
@@ -65,15 +69,24 @@ sub testFile{
 
 testFile;
 system("rm -f diff_*");
+
 open my $in, "<:encoding(utf8)", $ARGV[0] or die "$ARGV[0]: $!";
 my @lines = <$in>;
 close $in;
+
 my $testnb = -1;
+my $ret_value = 0;
+
 for my $line (@lines) {
 	$testnb++;
 	my $ls=`/bin/ls ${line}`;
-	my $ftls=`../src/ft_ls ${line}`;
+	my $ftls=`./ft_ls ${line}`;
 	print colored("Test${testnb}: ${line}", 'rgb222');
-	compareOutput($ls, $ftls, $testnb);
+	$ret_value |= compareOutput($ls, $ftls, $testnb);
 	print "\n";
+}
+
+if ($ret_value != 0) {
+
+	exit(1);
 }

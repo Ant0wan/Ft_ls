@@ -1,15 +1,25 @@
 -a
--R
 -r
 -t
 ~/
 ../
--R ../
--R ~/
--Rrat ../
--Rrat ~/
--- -R
--- -R ..
+-rat ../
+-rat ~/
+-- 
+--  ..
 /dev/
--- input-ls -R .. ok
---  -R .. ok
+-- input-ls  .. ok
+--  .. ok
+-l
+-l -a
+-l -r
+-l -t
+-l ~/
+-l ../
+-l -rat ../
+-l -rat ~/
+-l -- 
+-l --  ..
+-l /dev/
+-l -- input-ls  .. ok
+-l --  .. ok
