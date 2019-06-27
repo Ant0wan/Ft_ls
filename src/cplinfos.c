@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 15:35:25 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/27 14:11:52 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/27 16:49:52 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_get_cplinfos(t_dlist *list, t_cplinfos *infos,
 		if ((list->rights[0] == 'c' || list->rights[0] == 'b') && !i)
 		{
 			i = 1;
-			infos->size_pad += 10;
+			infos->size_pad += 8;
 		}
 		ft_upd_cplinfos(list, infos);
 		list = list->next;
