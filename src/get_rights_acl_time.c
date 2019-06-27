@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 12:56:48 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/23 15:24:13 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/25 15:11:50 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ char		ft_get_file_type(struct stat *statbuf)
 
 static char	ft_get_acl(char *path, int *i)
 {
-	ssize_t		xattr;
-	acl_t		acl;
-	acl_entry_t	tmp;
-	char		c;
+	acl_t			acl;
+	acl_entry_t		tmp;
+	ssize_t			xattr;
+	char			c;
 
 	acl = acl_get_link_np(path, ACL_TYPE_EXTENDED);
 	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &tmp) == -1)

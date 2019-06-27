@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 14:50:35 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/23 16:32:12 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/25 15:09:49 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	ft_print_maj_min(t_dlist *list)
 
 static int	print_list_l_option2(t_dlist *list, t_cplinfos *infos)
 {
-	if (ft_printf("%s  %*u ", list->rights, infos->file_pad,
+	if (ft_printf("%-11s %*u ", list->rights, infos->file_pad,
 				list->statbuf.st_nlink) < 0)
 	{
 		free_entire_dlist(list);
