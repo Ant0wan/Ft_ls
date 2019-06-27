@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/27 14:43:02 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/27 14:53:29 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ char			*concat_path(char *path, char *d_name)
 		return (NULL);
 	beg_path = full_path;
 	full_path = ft_strendcpy(full_path, path);
+#ifdef __unix__
 	if (full_path[-1] != '/')
+#endif
 		full_path = ft_strendcpy(full_path, "/");
 	full_path = ft_strendcpy(full_path, d_name);
 	return (beg_path);
@@ -87,18 +89,18 @@ int		subdir_select(char *prog_name, char *path, t_options options,
 {
 	char		*full_path;
 	int			ret_value;
-	struct stat test;
-	char		*tmp;
+//	struct stat test;
+//	char		*tmp;
 
 	ret_value = 0;
 	while (list)
 	{
-		lstat((tmp = ft_strjoin(path, list->d_name)), &test);
-		while (list && ((list->d_type != DT_DIR && ((test.st_mode & S_IFMT) == S_IFDIR))
+//		lstat((tmp = ft_strjoin(path, list->d_name)), &test);
+		while (list && ((list->d_type != DT_DIR && list->d_type != DT_UNKNOWN)
 					|| !ft_strcmp(".", list->d_name)
 					|| !ft_strcmp("..", list->d_name)))
 			list = list->next;
-		ft_strdel(&tmp);
+//		ft_strdel(&tmp);
 		if (list)
 		{
 			full_path = concat_path(path, list->d_name);
