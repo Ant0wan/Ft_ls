@@ -6,13 +6,10 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/27 16:32:47 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/27 21:45:24 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-//#include <errno.h>
-//#include <pwd.h>
 #include "display.h"
 #include "parser.h"
 #include "dlist.h"
@@ -20,7 +17,7 @@
 #include "libft.h"
 
 static inline int	display_l2(t_dlist *list, t_options *options,
-	   					t_cplinfos *infos, int first)
+								t_cplinfos *infos, int first)
 {
 	while (list)
 	{
@@ -52,11 +49,11 @@ static inline _Bool	check_is_empty(t_dlist *tmp, _Bool a)
 		if (!tmp)
 			is_empty = 0;
 	}
-	return (is_empty);	
+	return (is_empty);
 }
 
 int					display_l1(t_dlist *list, t_options *options,
-	   						char *path, int first)
+								char *path, int first)
 {
 	t_cplinfos	infos;
 
@@ -66,7 +63,7 @@ int					display_l1(t_dlist *list, t_options *options,
 		return (print_error(NULL, NULL));
 	}
 	ft_get_cplinfos(list, &infos, options, first);
-	if (((first == 1 && list->rights[0] == 'd') || /*!first ||*/ first != 4)
+	if (((first == 1 && list->rights[0] == 'd') || first != 4)
 			&& check_is_empty(list, options->a))
 	{
 		if (ft_printf("total %u\n", infos.total_blocks) < 0)

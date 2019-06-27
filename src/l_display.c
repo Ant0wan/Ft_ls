@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 14:50:35 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/27 17:05:23 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/27 21:53:44 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "parser.h"
 #include "error.h"
 
-static int	ft_print_date(t_dlist *list)
+static inline int	ft_print_date(t_dlist *list)
 {
 	char	*str;
 
@@ -42,7 +42,7 @@ static int	ft_print_date(t_dlist *list)
 	return (OK);
 }
 
-static int	ft_print_symlink(t_dlist *list)
+static inline int	ft_print_symlink(t_dlist *list)
 {
 	if (list->linkname[0])
 	{
@@ -63,7 +63,7 @@ static int	ft_print_symlink(t_dlist *list)
 	return (OK);
 }
 
-static int	ft_print_maj_min(t_dlist *list)
+static inline int	ft_print_maj_min(t_dlist *list)
 {
 	unsigned int minor;
 	unsigned int major;
@@ -78,16 +78,11 @@ static int	ft_print_maj_min(t_dlist *list)
 	return (OK);
 }
 
-static int	print_list_l_option2(t_dlist *list, t_cplinfos *infos)
+static inline int	print_list_l_option2(t_dlist *list, t_cplinfos *infos)
 {
-	if (ft_printf("%-11s %*u ", list->rights, infos->file_pad,
-				list->statbuf.st_nlink) < 0)
-	{
-		free_entire_dlist(list);
-		return (print_error(NULL, NULL));
-	}
-	if (ft_printf("%-*s  %-*s  ", infos->usr_pad, list->usr_name,
-				infos->grp_pad, list->gr_name) < 0)
+	if (ft_printf("%-11s %*u %-*s  %-*s  ", list->rights, infos->file_pad,
+				list->statbuf.st_nlink, infos->usr_pad, list->usr_name,
+			   	infos->grp_pad, list->gr_name) < 0)
 	{
 		free_entire_dlist(list);
 		return (print_error(NULL, NULL));
@@ -95,7 +90,7 @@ static int	print_list_l_option2(t_dlist *list, t_cplinfos *infos)
 	return (OK);
 }
 
-int			print_list_l_option(t_dlist *list, t_cplinfos *infos)
+int					print_list_l_option(t_dlist *list, t_cplinfos *infos)
 {
 	if (print_list_l_option2(list, infos) != OK)
 		return (SERIOUS);
