@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 15:35:25 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/23 16:58:26 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/27 14:11:52 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	ft_upd_cplinfos(t_dlist *tmp, t_cplinfos *infos)
 	unsigned int	len;
 
 	infos->total_blocks += tmp->statbuf.st_blocks;
-	if ((len = ft_nb_len(tmp->statbuf.st_nlink)) > infos->file_pad)
+	if ((len = ft_numlen(tmp->statbuf.st_nlink)) > infos->file_pad)
 		infos->file_pad = len;
 	if ((len = ft_strlen(tmp->usr_name)) > infos->usr_pad)
 		infos->usr_pad = len;
 	if ((len = ft_strlen(tmp->gr_name)) > infos->grp_pad)
 		infos->grp_pad = len;
-	if ((len = ft_nb_len(tmp->statbuf.st_size)) > infos->size_pad)
+	if ((len = ft_numlen(tmp->statbuf.st_size)) > infos->size_pad)
 		infos->size_pad = len;
 }
