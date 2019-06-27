@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/26 12:51:40 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/27 14:43:02 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,17 +179,19 @@ int				feed_readdir_with_each_argument(int argc, char **argv, int i,
 		t_options options)
 {
 	int		ret_value;
+	int		ival_after_opt;
 
 	ret_value = 0;
+	ival_after_opt = i;
 	if (i == 0)
 		ret_value = store_readdir_output(*argv, ".", options, 0);
 	else
 	{
 		while (i < argc)
 		{
-			if (i == 1 && argc == 2)
+			if (i == ival_after_opt && argc == ival_after_opt + 1)
 				ret_value = store_readdir_output(*argv, argv[i], options, 0);
-			else if (i == 1)
+			else if (i == ival_after_opt || ret_value == 2)
 				ret_value = store_readdir_output(*argv, argv[i], options, 2);
 			else
 				ret_value = store_readdir_output(*argv, argv[i], options, 1);
