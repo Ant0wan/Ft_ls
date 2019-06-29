@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 18:50:19 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 20:02:54 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void		set_booleans_of_t_options_suite(char *prog_name, char c,
 		if (!options->a)
 		{
 			options->upa = 1;
-//			options->a = 1;
+			options->a = 1;
+			options->b = 1;
 		}
 	}
 	else
@@ -45,6 +46,7 @@ static void		set_booleans_of_t_options(char *prog_name, char c,
 	{
 		options->a = 1;
 		options->upa = 0;
+		options->b = 0;
 	}
 	else if (c == 'r')
 		options->r = 1;
@@ -92,6 +94,7 @@ int				parser(int argc, char **argv, t_options *options)
 		++i;
 	if (argv[i] && !ft_strcmp(argv[i], "--"))
 		++i;
+	ft_printf("a:%d, A:%d, b:%d\n", options->a, options->upa, options->b);
 	sort_argv(argc, argv, i);
 	if (i == argc)
 		ret_value = feed_readdir_with_each_argument(argc, argv, 0, *options);
