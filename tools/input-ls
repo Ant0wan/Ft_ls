@@ -25,3 +25,9 @@
 -l -- input-ls  .. ok
 -l --  .. ok
 -lR
+-lut .
+-lut ~/
+-RutA . .
+-RtuA .
+-RuA .
+-Aatu ../
