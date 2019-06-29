@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/27 15:09:28 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 12:38:56 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ void	ft_init_var(t_dlist *var, struct stat *statbuf, int *first,
 int		file_info(char *prog_name, char *path, t_options options, int first)
 {
 	struct stat		statbuf;
-	int				ret_value;
 	t_dlist			var_tmp;
 
-	ret_value = 0;
 	if (lstat(path, &statbuf))
 		return (print_error(prog_name, path));
 	else
