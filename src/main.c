@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 10:01:06 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/26 11:58:13 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:06:35 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_options	options;
 
-	options = (t_options){.l = 0, .upr = 0, .a = 0, .r = 0, .t = 0};
+	options = (t_options){.l = 0, .upr = 0, .a = 0, .r = 0, .t = 0, .u = 0,
+		.upa = 0};
 	return (parser(argc, argv, &options));
 }
