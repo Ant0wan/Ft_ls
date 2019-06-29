@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readdir.c                                          :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 12:51:27 by sel-ahma         ###   ########.fr       */
+/*   Created: 2019/06/29 15:21:23 by abarthel          #+#    #+#             */
+/*   Updated: 2019/06/29 15:32:44 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "files.h"
 #include "libft.h"
 
-static inline t_dlist	*create_dir_list(DIR *ret_opendir, t_options options,
+t_dlist				*create_dir_list(DIR *ret_opendir, t_options options,
 		char *path)
 {
 	struct stat		statbuf;
@@ -93,42 +93,30 @@ static inline _Bool	print_path(int first, char *path)
 	return (0);
 }
 
+int				store_readdir_output(char *prog_name, char *path,
+		t_options options, int first)
+{
+	DIR		*ret_opendir;
+	t_dlist	*dir_list;
+	int		ret_value;
 
-	/*int					store_readdir_output(char *prog_name, char *path,
-	  t_options options, int first)
-	  {
-	  DIR		*ret_opendir;
-	  t_dlist	*dir_list;
-	  int		ret_value;
-
-	  ret_value = 0;
-	  dir_list = NULL;
-	  if (!(ret_opendir = opendir(path)))
-	  {
-	  if (errno == ENOTDIR)
-	  return (file_info(prog_name, path, options, first));
-	  return (print_error(prog_name, path));
-	  }
-	  if (!(*path == '.' && *(path + 1) == '\0') && !check_symlink(path, options)
-	  && path[ft_strlen(path) - 1] != '/')
-	  return (!closedir(ret_opendir)
-	  && file_info(prog_name, path, options, first));
-	  else
-	  dir_list = create_dir_list(ret_opendir, options, path);
-	  if (print_path(first, path))
-	  {
-	  free_entire_dlist(dir_list);
-	  return (print_error(NULL, NULL));
-	  }
-	  ret_value = display_list_content(dir_list, options, path, first);
-	  if (ret_value == 2)
-	  {
-	  free_entire_dlist(dir_list);
-	  return (ret_value);
-	  }
-	  if (options.upr)
-	  ret_value = subdir_select(prog_name, path, options, dir_list);
-	  free_entire_dlist(dir_list);
-	  closedir(ret_opendir);
-	  return (ret_value);
-	  }*/
+	ret_value = 0;
+	if (!(ret_opendir = opendir(path)))
+		return (failed_opendir(prog_name, path, options, first));
+	if ((path[0] != '.' || path[1] != '\0') && !check_symlink(path, options)
+			&& path[ft_strlen(path) - 1] != '/')
+		return (!closedir(ret_opendir)
+				&& file_info(prog_name, path, options, first));
+	else
+		dir_list = create_dir_list(ret_opendir, options, path);
+	if (print_path(first, path))
+		return (return_free(dir_list, print_error(NULL, NULL)));
+	ret_value = display_list_content(dir_list, options, path, first);
+	if (ret_value == 2)
+		return (return_free(dir_list, ret_value));
+	if (options.upr)
+		ret_value = subdir_select(prog_name, path, options, dir_list);
+	free_entire_dlist(dir_list);
+	closedir(ret_opendir);
+	return (ret_value);
+}
