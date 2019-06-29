@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 17:13:51 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 18:26:11 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,17 @@ t_dlist				*insert(t_dlist *restrict beg_list,
 	}
 	else if (!arg.options.a && *arg.ret_readdir->d_name == '.')
 		return (arg.beg_list);
+	insert_sort(&arg);
+	if (!arg.beg_list)
+	{
+		free_entire_dlist(arg.voyager);
+		return (NULL);
+	}
 	else
 	{
-		insert_sort(&arg);
-		if (!arg.beg_list)
-		{
-			free_entire_dlist(arg.voyager);
-			return (NULL);
-		}
-		else
-		{
-			arg.voyager->statbuf = *statbuf;
-			while (arg.beg_list->previous != NULL)
-				arg.beg_list = arg.beg_list->previous;
-			return (arg.beg_list);
-		}
+		arg.voyager->statbuf = *statbuf;
+		while (arg.beg_list->previous != NULL)
+			arg.beg_list = arg.beg_list->previous;
+		return (arg.beg_list);
 	}
 }
