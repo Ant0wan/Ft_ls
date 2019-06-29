@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 11:12:50 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/29 14:19:55 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 #include "parser.h"
 #include "error.h"
 #include "libft.h"
-
-/*
-** MACOS TYPE PARSER
-*/
-
-#ifndef __unix__
 
 static void		set_booleans_of_t_options(char *prog_name, char c,
 		t_options *options)
@@ -85,5 +79,3 @@ int				parser(int argc, char **argv, t_options *options)
 		ret_value = feed_readdir_with_each_argument(argc, argv, i, *options);
 	return (ret_value);
 }
-
-#endif

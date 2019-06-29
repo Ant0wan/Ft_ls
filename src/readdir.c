@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 12:54:56 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/29 13:59:05 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ char			*concat_path(char *path, char *d_name)
 		return (NULL);
 	beg_path = full_path;
 	full_path = ft_strendcpy(full_path, path);
-#ifdef __unix__
-	if (full_path[-1] != '/')
-#endif
-		full_path = ft_strendcpy(full_path, "/");
+	full_path = ft_strendcpy(full_path, "/");
 	full_path = ft_strendcpy(full_path, d_name);
 	return (beg_path);
 }
@@ -171,8 +168,6 @@ int				store_readdir_output(char *prog_name, char *path,
 	return (ret_value);
 }*/
 
-#ifndef __unix__
-
 int				feed_readdir_with_each_argument(int argc, char **argv, int i,
 		t_options options)
 {
@@ -198,5 +193,3 @@ int				feed_readdir_with_each_argument(int argc, char **argv, int i,
 	}
 	return (ret_value);
 }
-
-#endif
