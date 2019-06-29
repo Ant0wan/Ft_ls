@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 18:33:37 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/29 20:18:04 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,7 @@
 #include "files.h"
 #include "libft.h"
 
-/*static t_dlist	*create_dir_list(DIR *ret_opendir, t_options options,
-		char *path)
-{
-	struct stat		statbuf;
-	struct dirent	*ret_readdir;
-	t_dlist			*beg_list;
-	char			*pathname;
-
-	beg_list = NULL;
-	if (options.t || options.l)
-	{
-		while ((ret_readdir = readdir(ret_opendir)))
-		{
-			pathname = concat_path(path, ret_readdir->d_name);
-			if (lstat(pathname, &statbuf))
-			{
-				ft_memdel((void**)&pathname);
-				return (NULL);
-			}
-			beg_list = insert(beg_list, ret_readdir, options, &statbuf);
-			ft_memdel((void**)&pathname);
-			if (!beg_list)
-				return (NULL);
-		}
-	}
-	else
-	{
-		while ((ret_readdir = readdir(ret_opendir)))
-		{
-			beg_list = insert(beg_list, ret_readdir, options, &statbuf);
-			if (!beg_list)
-				return (NULL);
-		}
-	}
-	return (beg_list);
-}*/
-
-char			*concat_path(char *path, char *d_name)
+char	*concat_path(char *path, char *d_name)
 {
 	char	*full_path;
 	char	*beg_path;
@@ -107,68 +70,7 @@ int		subdir_select(char *prog_name, char *path, t_options options,
 	return (ret_value);
 }
 
-/*int				check_symlink(char *path, t_options options)
-{
-	struct stat	sb;
-	t_dlist		tmp;
-
-	if (!options.l)
-		return (1);
-	if (lstat(path, &sb))
-		return (1);
-	if (ft_get_file_type(&sb) == 'l')
-	{
-		ft_check_symlink(&tmp, path);
-		if (tmp.linkname[0] == '\0')
-			return (1);
-		return (0);
-	}
-	return (1);
-}
-
-int				store_readdir_output(char *prog_name, char *path,
-		t_options options, int first)
-{
-	DIR		*ret_opendir;
-	t_dlist	*dir_list;
-	int		ret_value;
-
-	ret_value = 0;
-	dir_list = NULL;
-	ret_opendir = opendir(path);
-	if (!ret_opendir)
-	{
-		if (errno == ENOTDIR)
-			return (file_info(prog_name, path, options, first));
-		else
-			return (print_error(prog_name, path));
-	}
-	if (!(*path == '.' && *(path + 1) == '\0') && !check_symlink(path, options)
-			&& path[ft_strlen(path) - 1] != '/')
-	{
-		closedir(ret_opendir);
-		return (file_info(prog_name, path, options, first));
-	}
-	else
-		dir_list = create_dir_list(ret_opendir, options, path);
-	if (first == 1)
-		ft_printf("\n%s:\n", path);
-	else if (first == 2)
-		ft_printf("%s:\n", path);
-	ret_value = display_list_content(dir_list, options, path, first);
-	if (ret_value == 2)
-	{
-		free_entire_dlist(dir_list);
-		return (ret_value);
-	}
-	if (options.upr)
-		ret_value = subdir_select(prog_name, path, options, dir_list);
-	free_entire_dlist(dir_list);
-	closedir(ret_opendir);
-	return (ret_value);
-}*/
-
-int				feed_readdir_with_each_argument(int argc, char **argv, int i,
+int		feed_readdir_with_each_argument(int argc, char **argv, int i,
 		t_options options)
 {
 	int		ret_value;
