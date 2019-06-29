@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls.c                                               :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbottini <tbottini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 13:51:32 by sel-ahma         ###   ########.fr       */
+/*   Created: 2019/06/29 15:21:23 by abarthel          #+#    #+#             */
+/*   Updated: 2019/06/29 15:26:56 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "files.h"
 #include "libft.h"
 
-t_dlist	*create_dir_list(DIR *ret_opendir, t_options options,
+t_dlist				*create_dir_list(DIR *ret_opendir, t_options options,
 		char *path)
 {
 	struct stat		statbuf;
@@ -93,22 +93,8 @@ static inline _Bool	print_path(int first, char *path)
 	return (0);
 }
 
-static inline int return_free(t_dlist *list, int ret_value)
-{
-	free_entire_dlist(list);
-	return (ret_value);
-}
-
-static inline int failed_opendir(char *prog_name, char *path, t_options options,
-	int first)
-{
-	if (errno == ENOTDIR)
-		return (file_info(prog_name, path, options, first));
-	return (print_error(prog_name, path));
-}
-
 int				store_readdir_output(char *prog_name, char *path,
-	   								t_options options, int first)
+		t_options options, int first)
 {
 	DIR		*ret_opendir;
 	t_dlist	*dir_list;
@@ -120,7 +106,7 @@ int				store_readdir_output(char *prog_name, char *path,
 	if ((path[0] != '.' || path[1] != '\0') && !check_symlink(path, options)
 			&& path[ft_strlen(path) - 1] != '/')
 		return (!closedir(ret_opendir)
-			   	&& file_info(prog_name, path, options, first));
+				&& file_info(prog_name, path, options, first));
 	else
 		dir_list = create_dir_list(ret_opendir, options, path);
 	if (print_path(first, path))
