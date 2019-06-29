@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:20:28 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/15 15:59:00 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 13:54:05 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,18 @@
 #ifdef __unix__
 # define ERROR_MSG "%s: cannot access '%s'"
 # define INV_OPT "%1$s: invalid option -- '%2$c'\n"\
-			"Try '%1$s --help' for more information.\n"
+	"Try '%1$s --help' for more information.\n"
 
 #else
 # define ERROR_MSG "%s: %s"
 # define INV_OPT "%1$s: illegal option -- %2$c\n"\
-			"usage: %1$s [-lRart] [file ...]\n"
+	"usage: %1$s [-lRart] [file ...]\n"
 
 #endif
 
-#ifdef __unix__
-# define UNRECOGNIZED_OPT "%1$s: unrecognized option '%2$s'\n"\
-	"Try '%1$s --help' for more information.\n"
-# define HELP "Usage: %s [OPTION]... [FILE]...\n"\
+int	print_help(char *prog_name)
+{
+	ft_printf("Usage: %s [OPTION]... [FILE]...\n"\
 	"List information about the FILEs (the current directory by default).\n"\
 	"Sort entries alphabetically if -t is not specified.\n\n"\
 	"Mandatory arguments to long options are mandatory for short"\
@@ -50,17 +49,14 @@
 	" 2  if serious trouble (e.g., cannot access command-line argument).\n\n"\
 	"Full documentation and source code at:"\
 	" <https://github.com/Ant0wan/Ft_ls.git>\n"\
-	"Authors: Sabri El Ahmar and Antoine Barthelemy\n"
-
-int	print_help(char *prog_name)
-{
-	ft_printf(HELP, prog_name);
+	"Authors: Sabri El Ahmar and Antoine Barthelemy\n", prog_name);
 	return (SERIOUS);
 }
 
 int	print_unrec_opt(char *prog_name, char *arg)
 {
-	ft_printf(UNRECOGNIZED_OPT, prog_name, arg);
+	ft_printf("%1$s: unrecognized option '%2$s'\n"\
+				"Try '%1$s --help' for more information.\n", prog_name, arg);
 	return (SERIOUS);
 }
 
