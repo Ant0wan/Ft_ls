@@ -16,8 +16,6 @@ use strict;
 use 5.010;
 use Term::ANSIColor;
 
-# Set path of ft_ls
-
 sub logError{
 
 	my $digits = sprintf("%02d", $_[2]); 
@@ -43,13 +41,10 @@ sub logError{
 
 sub compareOutput{
 
-	my $lsOutput = $_[0];
-	my $ftlsOutput = $_[1];
-
-	if (($ftlsOutput ne $lsOutput))
+	if (($_[1] ne $_[0]))
 	{
 		print colored( 'KO', 'red' ), "\n";
-		logError($lsOutput, $ftlsOutput, $_[2]);
+		logError($_[0], $_[1], $_[2]);
 		return (1);
 	}
 	else
