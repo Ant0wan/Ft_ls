@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 15:35:25 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/29 18:25:47 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/29 22:29:13 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_get_cplinfos(t_dlist *list, t_cplinfos *infos,
 		{
 			list = list->next;
 			continue;
-		}	
+		}
 		if ((*(list->d_name) == '.' && !options.a) && first != 4)
 		{
 			list = list->next;
