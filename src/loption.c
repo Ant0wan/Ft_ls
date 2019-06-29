@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 12:56:48 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/25 14:57:21 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/29 11:10:43 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ int			ft_get_l_infos(t_dlist *list, char *pathtmp)
 			path = concat_path(pathtmp, tmp->d_name);
 		else
 			path = pathtmp;
-	//	ft_printf("\n\nALLO IN GET L INFOS pathtmp = %s | path = %s\n",
-	//			pathtmp, path);
 		ft_get_file_rights(tmp, path, &i);
-	//	ft_printf("rights = %s\n", tmp->rights);
 		if (ft_get_gr_usr_name(tmp))
 			return (SERIOUS);
 		if (tmp->rights[0] == 'l')

@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/27 14:53:29 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 12:54:56 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 #include "files.h"
 #include "libft.h"
 
-#include <stdio.h>
-static t_dlist	*create_dir_list(DIR *ret_opendir, t_options options,
+/*static t_dlist	*create_dir_list(DIR *ret_opendir, t_options options,
 		char *path)
 {
 	struct stat		statbuf;
@@ -58,7 +57,7 @@ static t_dlist	*create_dir_list(DIR *ret_opendir, t_options options,
 		}
 	}
 	return (beg_list);
-}
+}*/
 
 char			*concat_path(char *path, char *d_name)
 {
@@ -89,18 +88,14 @@ int		subdir_select(char *prog_name, char *path, t_options options,
 {
 	char		*full_path;
 	int			ret_value;
-//	struct stat test;
-//	char		*tmp;
 
 	ret_value = 0;
 	while (list)
 	{
-//		lstat((tmp = ft_strjoin(path, list->d_name)), &test);
 		while (list && ((list->d_type != DT_DIR && list->d_type != DT_UNKNOWN)
 					|| !ft_strcmp(".", list->d_name)
 					|| !ft_strcmp("..", list->d_name)))
 			list = list->next;
-//		ft_strdel(&tmp);
 		if (list)
 		{
 			full_path = concat_path(path, list->d_name);
@@ -115,11 +110,11 @@ int		subdir_select(char *prog_name, char *path, t_options options,
 	return (ret_value);
 }
 
-int				check_symlink(char *path, t_options options)
+/*int				check_symlink(char *path, t_options options)
 {
-	struct stat sb;
-	t_dlist tmp;
-	
+	struct stat	sb;
+	t_dlist		tmp;
+
 	if (!options.l)
 		return (1);
 	if (lstat(path, &sb))
@@ -138,10 +133,11 @@ int				store_readdir_output(char *prog_name, char *path,
 		t_options options, int first)
 {
 	DIR		*ret_opendir;
-	t_dlist	*dir_list = NULL;
+	t_dlist	*dir_list;
 	int		ret_value;
 
 	ret_value = 0;
+	dir_list = NULL;
 	ret_opendir = opendir(path);
 	if (!ret_opendir)
 	{
@@ -150,8 +146,8 @@ int				store_readdir_output(char *prog_name, char *path,
 		else
 			return (print_error(prog_name, path));
 	}
-	if (!(*path == '.' && *(path + 1) == '\0') && path[ft_strlen(path) - 1] != '/'
-		   	&& !check_symlink(path, options))
+	if (!(*path == '.' && *(path + 1) == '\0') && !check_symlink(path, options)
+			&& path[ft_strlen(path) - 1] != '/')
 	{
 		closedir(ret_opendir);
 		return (file_info(prog_name, path, options, first));
@@ -173,7 +169,7 @@ int				store_readdir_output(char *prog_name, char *path,
 	free_entire_dlist(dir_list);
 	closedir(ret_opendir);
 	return (ret_value);
-}
+}*/
 
 #ifndef __unix__
 
