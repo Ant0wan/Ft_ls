@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 15:45:26 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:18:30 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,25 @@ static int	display_a(t_dlist *list)
 	return (OK);
 }
 
+static int	display_upa(t_dlist *list)
+{
+	while (list)
+	{
+		if (!ft_strcmp(list->d_name, ".") || !ft_strcmp(list->d_name, ".."))
+		{
+			list = list->next;
+			continue ;
+		}
+		if (ft_printf("%s\n", list->d_name) < 0)
+		{
+			free_entire_dlist(list);
+			return (print_error(NULL, NULL));
+		}
+		list = list->next;
+	}
+	return (OK);
+}
+
 static int	classic_display(t_dlist *list)
 {
 	while (list)
@@ -71,6 +90,8 @@ int			display_list_content(t_dlist *list, t_options options, char *path,
 		return (print_error(NULL, NULL));
 	else if (options.l)
 		return (display_l1(list, &options, path, first));
+	else if (options.upa)
+		return (display_upa(list));
 	else if (options.a)
 		return (display_a(list));
 	else
