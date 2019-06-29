@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:20:28 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 14:01:53 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 18:34:32 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	print_error(char *restrict prog_name, char *restrict av)
 int	print_usage(char *restrict prog_name, char c)
 {
 	if (!ft_dprintf(STDERR_FILENO, "%1$s: illegal option -- %2$c\n"\
-					"usage: %1$s [-lRart] [file ...]\n", prog_name, c))
+					"usage: %1$s [-ARalrtu] [file ...]\n", prog_name, c))
 		perror(NULL);
 	return (SERIOUS);
 }
