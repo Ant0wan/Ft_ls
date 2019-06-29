@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 16:57:59 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:05:27 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			display_list_content(t_dlist *list, t_options options, char *path,
 	if (!list)
 		return (print_error(NULL, NULL));
 	else if (options.l)
-		return (display_l1(list, &options, path, first));
+		return (display_l1(list, options, path, first));
 	else if (options.a)
 		return (display_a(list));
 	else
