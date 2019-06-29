@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 12:56:48 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/25 15:11:50 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:23:20 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int			ft_file_time(time_t date)
 	long int	current_time;
 
 	current_time = time(0);
-	if (date < current_time - 15552000)
+	if (date < current_time - 15724800)
 		return (1);
 	else if (date > current_time)
 		return (1);

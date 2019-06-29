@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 14:50:35 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/29 15:44:12 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:31:19 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,37 @@
 #include "parser.h"
 #include "error.h"
 
-static inline int	ft_print_date(t_dlist *list)
+static inline int			ft_print_access_date(t_dlist *list)
+{
+	char *str;
+
+	if (!(str = ctime(&list->statbuf.st_atime)))
+		return (1);
+	if (!(ft_file_time(list->statbuf.st_atime)))
+	{
+		if (ft_printf("%.12s ", &str[4]) < 0)
+		{
+			free_entire_dlist(list);
+			return (print_error(NULL, NULL));
+		}
+	}
+	else
+	{
+		if (ft_printf("%.7s%5.4s ", &str[4], &str[20]) < 0)
+		{
+			free_entire_dlist(list);
+			return (print_error(NULL, NULL));
+		}
+	}
+	return (OK);
+}
+
+static inline int	ft_print_date(t_dlist *list, t_options options)
 {
 	char	*str;
 
+	if (options.u)
+		return (ft_print_access_date(list));
 	if (!(str = ctime(&list->statbuf.st_mtime)))
 		return (1);
 	if (!(ft_file_time(list->statbuf.st_mtime)))
@@ -90,7 +117,8 @@ static inline int	print_list_l_option2(t_dlist *list, t_cplinfos *infos)
 	return (OK);
 }
 
-int					print_list_l_option(t_dlist *list, t_cplinfos *infos)
+int					print_list_l_option(t_dlist *list, t_cplinfos *infos,
+										t_options options)
 {
 	if (print_list_l_option2(list, infos) != OK)
 		return (SERIOUS);
@@ -107,8 +135,8 @@ int					print_list_l_option(t_dlist *list, t_cplinfos *infos)
 			return (print_error(NULL, NULL));
 		}
 	}
-	if (ft_print_date(list))
-		return (ft_print_date(list));
+	if (ft_print_date(list, options))
+		return (ft_print_date(list, options));
 	if (ft_printf("%s", list->d_name) < 0)
 	{
 		free_entire_dlist(list);

@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 15:35:25 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/27 16:49:52 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:03:06 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 
 void	ft_get_cplinfos(t_dlist *list, t_cplinfos *infos,
-			t_options *options, int first)
+			t_options options, int first)
 {
 	int i;
 
@@ -23,7 +23,7 @@ void	ft_get_cplinfos(t_dlist *list, t_cplinfos *infos,
 	init_cplinfos(infos);
 	while (list)
 	{
-		if ((*(list->d_name) == '.' && !options->a) && first != 4)
+		if ((*(list->d_name) == '.' && !options.a) && first != 4)
 		{
 			list = list->next;
 			continue ;
