@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 17:18:30 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:26:47 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static int	classic_display(t_dlist *list)
 int			display_list_content(t_dlist *list, t_options options, char *path,
 									int first)
 {
-	ft_printf("%d | %d\n", options.u, options.t);
 	if (!list)
 		return (print_error(NULL, NULL));
 	else if (options.l)
