@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 20:02:54 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 20:05:10 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int				parser(int argc, char **argv, t_options *options)
 		++i;
 	if (argv[i] && !ft_strcmp(argv[i], "--"))
 		++i;
-	ft_printf("a:%d, A:%d, b:%d\n", options->a, options->upa, options->b);
 	sort_argv(argc, argv, i);
 	if (i == argc)
 		ret_value = feed_readdir_with_each_argument(argc, argv, 0, *options);

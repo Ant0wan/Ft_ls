@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 15:21:23 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 15:32:44 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/29 21:58:57 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,41 @@
 #include "files.h"
 #include "libft.h"
 
+static inline _Bool	inwhile(DIR *ret_opendir, t_options options,
+		char *path, t_dlist **beg_list)
+{
+	struct stat		statbuf;
+	struct dirent	*ret_readdir;
+	char			*pathname;
+
+	while ((ret_readdir = readdir(ret_opendir)))
+	{
+		pathname = concat_path(path, ret_readdir->d_name);
+		if (lstat(pathname, &statbuf))
+		{
+			ft_memdel((void**)&pathname);
+			return (0);
+		}
+		*beg_list = insert(*beg_list, ret_readdir, options, &statbuf);
+		ft_memdel((void**)&pathname);
+		if (!beg_list)
+			return (0);
+	}
+	return (1);
+}
+
 t_dlist				*create_dir_list(DIR *ret_opendir, t_options options,
 		char *path)
 {
 	struct stat		statbuf;
 	struct dirent	*ret_readdir;
 	t_dlist			*beg_list;
-	char			*pathname;
 
 	beg_list = NULL;
 	if (options.t || options.l)
 	{
-		while ((ret_readdir = readdir(ret_opendir)))
-		{
-			pathname = concat_path(path, ret_readdir->d_name);
-			if (lstat(pathname, &statbuf))
-			{
-				ft_memdel((void**)&pathname);
-				return (NULL);
-			}
-			beg_list = insert(beg_list, ret_readdir, options, &statbuf);
-			ft_memdel((void**)&pathname);
-			if (!beg_list)
-				return (NULL);
-		}
+		if (!inwhile(ret_opendir, options, path, &beg_list))
+			return (NULL);
 	}
 	else
 	{
@@ -93,7 +104,7 @@ static inline _Bool	print_path(int first, char *path)
 	return (0);
 }
 
-int				store_readdir_output(char *prog_name, char *path,
+int					store_readdir_output(char *prog_name, char *path,
 		t_options options, int first)
 {
 	DIR		*ret_opendir;
