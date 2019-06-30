@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/30 13:52:48 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/30 17:49:51 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static void		set_booleans_of_t_options_suite(char *prog_name, char c,
 		options->f = 1;
 		options->a = 1;
 	}
-	else if (c == 'T')
-		options->upt = 1;
 	else
 	{
 		print_usage(prog_name, c);
@@ -64,6 +62,8 @@ static void		set_booleans_of_t_options(char *prog_name, char c,
 		options->r = 1;
 	else if (c == 't')
 		options->t = 1;
+	else if (c == 'T')
+		options->upt = 1;
 	else if (c == 'u')
 	{
 		options->u = 1;
