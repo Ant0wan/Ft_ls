@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/30 12:49:36 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/30 13:11:52 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ extern inline int	compare(struct s_ins *restrict arg)
 	int	ret_time_cmp;
 	int	r;
 
+	if (arg->options.f)
+		return (1);
 	if (arg->options.t && (ret_time_cmp = time_cmp(arg)))
 	{
 		r = arg->options.r ? -1 : 1;
