@@ -1,0 +1,23 @@
+language: c
+
+sudo: true
+
+os:
+    - osx
+    - linux
+
+compiler:
+    - gcc
+    - clang
+
+script:
+    - make
+    - make clean
+
+env:
+    global:
+        - MAKEFLAGS="-j"
+
+branches:
+    only:
+        - master

@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 14:50:35 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/30 15:43:49 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/30 16:08:32 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ extern inline int	ft_print_date(t_dlist *list, t_options options)
 	if (options.c)
 		return (ft_print_status_date(list, options));
 	if (!(str = ctime(&list->statbuf.st_mtime)))
-		return (1);
+		return (SERIOUS);
 	if (!(ft_file_time(list->statbuf.st_mtime)) || options.upt)
 	{
 		if (ft_print_str(str, list, options))

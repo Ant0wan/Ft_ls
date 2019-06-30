@@ -1,0 +1,23 @@
+language: c
+
+os:
+    - osx
+
+compiler:
+    - clang
+
+script:
+    - make test
+
+env:
+    global:
+        - MAKEFLAGS="-j"
+
+branches:
+    only:
+        - master
+
+notifications:
+    email:
+        on_success: never
+        on_failure: always
