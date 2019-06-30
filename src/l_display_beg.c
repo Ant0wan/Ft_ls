@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 19:54:09 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/06/30 12:06:16 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,19 @@ static inline int	display_l2(t_dlist *list, t_options options,
 	return (OK);
 }
 
-//		if ((!ft_strcmp(tmp->d_name, ".") || !ft_strcmp(tmp->d_name, ".."))
-//				&& options.upa && first != 4)
-//		{
-//			tmp = tmp->next;
-//			continue;
-//		}
-//		if (((*(tmp->d_name) == '.' && *(tmp->d_name + 1) != '.'
-//		&& *(tmp->d_name + 1) != '\0') && !options.a) && first != 4)
-///		{
-//			tmp = tmp->next;
-//			continue ;
-//		}
 static inline _Bool	check_is_empty(t_dlist *tmp, t_options options)
 {
 	_Bool	is_empty;
 
 	is_empty = 1;
-	while (tmp && options.a 
-	&& (!ft_strcmp(tmp->d_name, ".") || !ft_strcmp(tmp->d_name, "..")))	
+	while (tmp && options.a
+			&& (!ft_strcmp(tmp->d_name, ".") || !ft_strcmp(tmp->d_name, "..")))
 		tmp = tmp->next;
-	if (!tmp && !options.upa)
+	if (!tmp && options.b)
 		return (0);
 	while (tmp)
 	{
-		if (tmp && options.upa && *(tmp->d_name) == '.'
+		if (tmp && *(tmp->d_name) == '.'
 			&& *(tmp->d_name + 1) != '\0' && *(tmp->d_name + 1) != '.')
 			break ;
 		if (tmp && *tmp->d_name != '.')
