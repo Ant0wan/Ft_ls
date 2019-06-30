@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 18:15:45 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/06/30 12:49:36 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ static inline int	time_cmp(struct s_ins *restrict arg)
 		if (arg->voyager->statbuf.st_atime > arg->statbuf->st_atime)
 			return (1);
 		else if (arg->voyager->statbuf.st_atime < arg->statbuf->st_atime)
+			return (-1);
+		else
+			return (0);
+	}
+	else if (arg->options.c)
+	{
+		if (arg->voyager->statbuf.st_ctime > arg->statbuf->st_ctime)
+			return (1);
+		else if (arg->voyager->statbuf.st_ctime < arg->statbuf->st_ctime)
 			return (-1);
 		else
 			return (0);
