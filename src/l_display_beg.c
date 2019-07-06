@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/07/06 15:46:36 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/07/06 17:21:39 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static inline int	display_l2(t_dlist *list, t_options options,
 			free_entire_dlist(list);
 			return (print_error(NULL, NULL));
 		}
-		if (list->rights[10] == '@')
+		if (list->rights[10] == '@' && options.at)
 			ft_print_acl(list, (char*)vars[1]);
-		if (list->rights[10] == '@' || list->rights[10] == '+')
+		if ((list->rights[10] == '@' || list->rights[10] == '+') && options.e)
 			ft_get_extended_rights(list, (char*)vars[1]);
 		list = list->next;
 	}
