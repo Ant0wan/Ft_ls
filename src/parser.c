@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:43:53 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/30 17:49:51 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/07/06 17:09:32 by abarthel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 #include "parser.h"
 #include "error.h"
 #include "libft.h"
+
+static void		set_booleans_of_t_options_suite2(char *prog_name, char c,
+		t_options *options)
+{
+	if (c == 'e')
+		options->e = 1;
+	else if (c == '@')
+		options->at = 1;
+	else
+	{
+		print_usage(prog_name, c);
+		exit(SERIOUS);
+	}
+}
 
 static void		set_booleans_of_t_options_suite(char *prog_name, char c,
 		t_options *options)
@@ -39,10 +53,7 @@ static void		set_booleans_of_t_options_suite(char *prog_name, char c,
 		options->a = 1;
 	}
 	else
-	{
-		print_usage(prog_name, c);
-		exit(SERIOUS);
-	}
+		set_booleans_of_t_options_suite2(prog_name, c, options);
 }
 
 static void		set_booleans_of_t_options(char *prog_name, char c,
