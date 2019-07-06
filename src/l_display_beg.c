@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:05:26 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/30 12:06:16 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/07/06 15:46:36 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 #include "libft.h"
 
 static inline int	display_l2(t_dlist *list, t_options options,
-		t_cplinfos *infos, int first)
+		t_cplinfos *infos, void **vars)
 {
 	while (list)
 	{
 		if ((!ft_strcmp(list->d_name, ".") || !ft_strcmp(list->d_name, ".."))
-				&& options.upa && first != 4)
+				&& options.upa && *(int*)vars[0] != 4)
 		{
 			list = list->next;
 			continue;
 		}
-		if (*(list->d_name) == '.' && !options.a && first != 4)
+		if (*(list->d_name) == '.' && !options.a && *(int*)vars[0] != 4)
 		{
 			list = list->next;
 			continue;
@@ -37,6 +37,10 @@ static inline int	display_l2(t_dlist *list, t_options options,
 			free_entire_dlist(list);
 			return (print_error(NULL, NULL));
 		}
+		if (list->rights[10] == '@')
+			ft_print_acl(list, (char*)vars[1]);
+		if (list->rights[10] == '@' || list->rights[10] == '+')
+			ft_get_extended_rights(list, (char*)vars[1]);
 		list = list->next;
 	}
 	return (OK);
@@ -70,6 +74,7 @@ int					display_l1(t_dlist *list, t_options options,
 		char *path, int first)
 {
 	t_cplinfos	infos;
+	void		*vars[2];
 
 	if (ft_get_l_infos(list, path) == SERIOUS)
 	{
@@ -86,5 +91,7 @@ int					display_l1(t_dlist *list, t_options options,
 			return (print_error(NULL, NULL));
 		}
 	}
-	return (display_l2(list, options, &infos, first));
+	vars[0] = &first;
+	vars[1] = path;
+	return (display_l2(list, options, &infos, vars));
 }

@@ -6,7 +6,7 @@
 #    By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 14:45:47 by abarthel          #+#    #+#              #
-#    Updated: 2019/06/30 13:04:04 by sel-ahma         ###   ########.fr        #
+#    Updated: 2019/07/06 15:31:41 by sel-ahma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = ft_ls
 
 SOURCES_PATH := ./src/
 
-SOURCES :=	compare.c \
+SOURCES :=	acl.c \
+			compare.c \
 			cplinfos.c \
 			display.c \
 			dlist.c \

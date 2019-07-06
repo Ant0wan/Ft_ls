@@ -6,7 +6,7 @@
 /*   By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 13:46:15 by abarthel          #+#    #+#             */
-/*   Updated: 2019/06/29 22:28:10 by abarthel         ###   ########.fr       */
+/*   Updated: 2019/07/06 15:38:08 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ int		ft_print_access_date(t_dlist *list);
 int		ft_print_date(t_dlist *list, t_options options);
 int		ft_print_symlink(t_dlist *list);
 int		ft_print_maj_min(t_dlist *list);
+int		ft_print_acl(t_dlist *list, char *path);
+int		ft_get_extended_rights(t_dlist *list, char *path);
 
 #endif
