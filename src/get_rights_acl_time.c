@@ -6,7 +6,7 @@
 /*   By: sel-ahma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 12:56:48 by sel-ahma          #+#    #+#             */
-/*   Updated: 2019/06/29 17:23:20 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2019/07/06 14:49:27 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void		ft_get_file_rights(t_dlist *tmp, char *path, int *i)
 	tmp->rights[8] = tmp->statbuf.st_mode & S_IWOTH ? 'w' : '-';
 	tmp->rights[9] = tmp->statbuf.st_mode & S_IXOTH ? 'x' : '-';
 	if (tmp->statbuf.st_mode & S_ISUID)
-		tmp->rights[4] = (tmp->statbuf.st_mode & S_IXUSR) ? 's' : 'S';
+		tmp->rights[3] = (tmp->statbuf.st_mode & S_IXUSR) ? 's' : 'S';
 	if (tmp->statbuf.st_mode & S_ISGID)
-		tmp->rights[7] = (tmp->statbuf.st_mode & S_IXGRP) ? 's' : 'S';
+		tmp->rights[6] = (tmp->statbuf.st_mode & S_IXGRP) ? 's' : 'S';
 	if (tmp->statbuf.st_mode & S_ISVTX)
 		tmp->rights[9] = tmp->rights[9] == '-' ? 'T' : 't';
 	tmp->rights[10] = ft_get_acl(path, i);
