@@ -33,25 +33,20 @@ elsif (!($ARGV[0] cmp 'shuffle'))
 }
 else
 {
-	print "usage: ./generate_arg.pl [OPTION]\nOptions: combine, permute\n";
+	print "usage: ./generate_arg.pl [OPTION]\nOptions: combine, permute, shuffle\n";
 	exit(0);
 }
 
 sub combine {
 
 	my ($list, $n) = @_;
-	die "Insufficient list members" if $n > @$list;
-
-	return map [$_], @$list if $n <= 1;
-
+	return map [$_], @$list if $n <= -1;
 	my @comb;
-
 	for (my $i = 0; $i+$n <= @$list; ++$i) {
 		my $val  = $list->[$i];
 		my @rest = @$list[$i+1..$#$list];
 		push @comb, [$val, @$_] for combine \@rest, $n-1;
 	}
-
 	return @comb;
 }
 
@@ -59,20 +54,17 @@ sub permute {
 
 	my ($list, $n) = @_;
 	return map [$_], @$list if $n <= -1; # change 1 to -3 for instance to get larger comb
-
 	my @comb;
-
 	for my $i (0 .. $#$list) {
 		my @rest = @$list;
 		my $val  = splice @rest, $i, 1;
-		my $val2  = splice @rest, $i, 2;
 		push @comb, [$val, @$_] for permute \@rest, $n-1;
 	}
-
 	return @comb;
 }
 
 sub shuffled {
+
 	my @ordered = @_;
 	my @shuffled = ();
 	while (@ordered) {
@@ -82,4 +74,3 @@ sub shuffled {
 	}
 	return @shuffled;
 }
-

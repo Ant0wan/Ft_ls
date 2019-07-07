@@ -35,8 +35,8 @@ sub logError{
 	system("rm -f error_*");
 
 	# Display diff for log to be caputre in Travis.ci log
-	system("cat diff_test${digits}.log"); # Comment these two lines
-	system("rm -f diff_*");               # if you want to a diff.log file
+	#system("cat diff_test${digits}.log"); # Comment these two lines
+	#system("rm -f diff_*");               # if you want a diff.log file
 }
 
 sub compareOutput{
