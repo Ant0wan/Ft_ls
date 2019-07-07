@@ -2,11 +2,9 @@ language: c
 
 os:
     - osx
-    - linux
 
 compiler:
     - clang
-    - gcc
 
 script:
     - make test
