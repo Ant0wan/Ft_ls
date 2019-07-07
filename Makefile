@@ -6,7 +6,7 @@
 #    By: abarthel <abarthel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 14:03:51 by abarthel          #+#    #+#              #
-#    Updated: 2019/06/30 13:31:50 by abarthel         ###   ########.fr        #
+#    Updated: 2019/07/07 15:05:40 by abarthel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ fclean:
 re: fclean $(NAME)
 
 test : $(NAME)
-	@$(TEST_TOOL) $(TEST_INPUT)
+	@$(TEST_TOOL) $(TEST_INPUT) || true
 
 -include $(DEPENDS)
 
