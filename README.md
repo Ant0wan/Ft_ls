@@ -1,7 +1,45 @@
-# 42Libc [![42](https://i.imgur.com/9NXfcit.jpg)](i.imgur.com/9NXfcit.jpg)[![freetime](https://i.imgur.com/8IcDLkc.png)](i.imgur.com/8IcDLkc.png)
+# Ft_ls [![42](https://i.imgur.com/9NXfcit.jpg)](i.imgur.com/9NXfcit.jpg)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/de54d3705c7045308409aae5d00b5f52)](https://www.codacy.com/app/Ant0wan/Ft_ls?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ant0wan/Ft_ls&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.com/Ant0wan/Ft_ls.svg?token=VdyQsq19sYjUnnsje5hY&branch=master)](https://travis-ci.com/Ant0wan/Ft_ls)
 
+---
+
+## Description
+
+`ft_ls` is a tiny and simplified copy of the functionalities of the command line tool ls.
+
+It behaves almost as identical to the original ls command with the variations mentionned in its man page (please refer to Man ft_ls section).
+
+It includes test tools. `make test` will execute them. tests can be customized in the `/tools/input-ls` text file.
+
+- Authorized functions:
+
+```
+write
+opendir
+readdir
+closedir
+stat
+lstat
+getpwuid
+getgrgid
+listxattr
+getxattr
+time
+ctime
+readlink
+malloc
+free
+perror
+strerror
+exit
+```
+
+---
+
+## Man ft_ls
+
+Below, details about ft_ls usage.
 
 ```shell=
 FT_LS(1)				42 Projects Commands Manual					FT_LS(1)
@@ -168,21 +206,30 @@ SEE ALSO
 						July 2019
 ```
 
+---
 
+## Usage
 
+Check Perl is up to date on your system.
 
+- Compiling the project
 
+```
+git clone https://github.com/Ant0wan/Ft_ls ; cd Ft_ls ; make -j
+```
 
+- Executing program tests
 
+```
+make test
+```
 
+- Usage example
 
+```
+./ft_ls -lRA
+```
 
+## Demo
 
-
-
-
-
-
-
-
-
+[![Demoft_ls](https://i.imgur.com/c1LECl5.gif)](i.imgur.com/c1LECl5.gif)
