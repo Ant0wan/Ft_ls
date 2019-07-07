@@ -5,7 +5,7 @@ sudo: true
 script:
     - make -j
     - make clean
-	- make test
+    - make test
 
 branches:
     only:
