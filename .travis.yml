@@ -3,8 +3,6 @@ language: c
 sudo: true
 
 script:
-    - make -j
-    - make clean
     - make test
 
 branches:
