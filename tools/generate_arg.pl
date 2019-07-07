@@ -3,10 +3,11 @@
 use strict;
 use warnings;
 
-my $strings = [qw(@ A R T a c  e f l r t u -- ~/ ../ . DOESNOTEXIST)];
+my $strings = [qw(-@ -A -R -T -a -c -e -f -l -r -t -u -- ~/ ../ . DOESNOTEXIST)];
 
 sub combine;
 sub permute;
+sub shuffle;
 
 if (!($ARGV[0]))
 {
@@ -20,6 +21,15 @@ elsif (!($ARGV[0] cmp 'combine'))
 elsif (!($ARGV[0] cmp 'permute'))
 {
 	print "@$_\n" for permute $strings, 2;
+}
+elsif (!($ARGV[0] cmp 'shuffle'))
+{
+	my $a = 0;
+	while ($a <= 100)
+	{
+		print join(" ", shuffled(@$strings)) . "\n";
+		++$a;
+	}
 }
 else
 {
@@ -48,17 +58,28 @@ sub combine {
 sub permute {
 
 	my ($list, $n) = @_;
-	die "Insufficient list members" if $n > @$list;
-
-	return map [$_], @$list if $n <= 1;
+	return map [$_], @$list if $n <= -1; # change 1 to -3 for instance to get larger comb
 
 	my @comb;
 
 	for my $i (0 .. $#$list) {
 		my @rest = @$list;
 		my $val  = splice @rest, $i, 1;
+		my $val2  = splice @rest, $i, 2;
 		push @comb, [$val, @$_] for permute \@rest, $n-1;
 	}
 
 	return @comb;
 }
+
+sub shuffled {
+	my @ordered = @_;
+	my @shuffled = ();
+	while (@ordered) {
+		my $b = int(rand() * @ordered);
+		push @shuffled, $ordered[$b];
+		splice(@ordered, $b, 1);
+	}
+	return @shuffled;
+}
+
