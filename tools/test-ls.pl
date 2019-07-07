@@ -44,7 +44,9 @@ sub compareOutput{
 	if (($_[1] ne $_[0]))
 	{
 		print colored( 'KO', 'red' ), "\n";
+		sleep(10);
 		logError($_[0], $_[1], $_[2]);
+		sleep(10);
 		return (1);
 	}
 	else
