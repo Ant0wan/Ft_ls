@@ -1,8 +1,6 @@
 # 42Libc [![42](https://i.imgur.com/9NXfcit.jpg)](i.imgur.com/9NXfcit.jpg)[![freetime](https://i.imgur.com/8IcDLkc.png)](i.imgur.com/8IcDLkc.png)
 
-[![Build Status](https://travis-ci.com/Ant0wan/Ft_ls.svg?token=VdyQsq19sYjUnnsje5hY&branch=master)](https://travis-ci.com/Ant0wan/Ft_ls)
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de54d3705c7045308409aae5d00b5f52)](https://www.codacy.com/app/Ant0wan/Ft_ls?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ant0wan/Ft_ls&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de54d3705c7045308409aae5d00b5f52)](https://www.codacy.com/app/Ant0wan/Ft_ls?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ant0wan/Ft_ls&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.com/Ant0wan/Ft_ls.svg?token=VdyQsq19sYjUnnsje5hY&branch=master)](https://travis-ci.com/Ant0wan/Ft_ls)
 
 
 ```shell=
